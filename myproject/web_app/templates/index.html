@@ -1,0 +1,20 @@
+{% extends 'components/base.html' %}
+
+{% block title %} หน้าหลัก {% endblock %}
+
+{% block content %}
+
+<div class="flex-grow">
+{% if messages %}
+    {% for message in messages %}
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+        <span class="font-medium">{{message}}</span>
+      </div>
+    {% endfor %}
+    
+{% endif %}
+
+<img src="https://r4.wallpaperflare.com/wallpaper/968/387/691/joker-movies-artwork-joaquin-phoenix-joker-2019-movie-hd-wallpaper-833a73fae8854c5de8026e6321c852e1.jpg" alt="Joker">
+
+</div>
+{% endblock %}
