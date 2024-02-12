@@ -36,24 +36,18 @@
           </button>
         </div>
       
-        <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+        <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md text-sky-100   bg-[#001d64] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
           <div class="py-1" role="none">
             <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-            <a href="{% url 'about' %}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</a>
-            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
-            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
-            <form method="POST" action="#" role="none">
-              <button type="submit" class="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
-            </form>
+            <a href="{% url 'about' %}" class="bg-[#001d64] block px-4 py-2 text-sm hover:text-[#eee1ba] hover:bg-[#006abc]" role="menuitem" tabindex="-1" id="menu-item-0">เเก้ไขข้อมูลส่วนตัว</a>
+            <a href="#" class="bg-[#001d64] block px-4 py-2 text-sm hover:text-[#eee1ba] hover:bg-[#006abc]" role="menuitem" tabindex="-1" id="menu-item-1">รายการส่งซัก-รีด</a>
+            <a href="#" class="bg-[#001d64] block px-4 py-2 text-sm hover:text-[#eee1ba] hover:bg-[#006abc]" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
+            <a href="{% url 'logout' %}" class="bg-[#001d64] block px-4 py-2 text-sm hover:text-[#eee1ba] hover:bg-[#006abc]" role="menuitem" tabindex="-1" id="menu-item-2">ออกจากระบบ</a>
           </div>
         </div>
       </div>
       
-      <ul id="collapseMenu" class='lg:!flex lg:space-x-5 max-lg:space-y-2 max-lg:hidden max-lg:py-4 max-lg:w-full'>
-        <li class='max-lg:border-b max-lg:bg-[#007bff] max-lg:py-2 max-lg:rounded'>
-          <a href="{% url 'logout' %}" class='px-6 py-3 rounded-md font-bold text-sky-100 bg-[#001d64] transition-all ease-in-out duration-300 hover:text-[#eee1ba] hover:bg-[#006abc] hover:border-[#deaf85] text-[17px]'>ออกจากระบบ</a>
-      </li>
-      </ul>
+      
       
       {% else %}
       <!--Navbar not_authenticated-->
@@ -75,7 +69,7 @@
         </li>
         <li class='max-lg:border-b max-lg:bg-[#007bff] max-lg:py-2  rounded-md border-3'>
           <a href="{% url 'login' %}"
-            class='px-10 py-3 text-base rounded-md font-bold text-sky-100   bg-[#006abc] transition-all ease-in-out duration-300  hover:text-[#eee1ba] hover:bg-[#39ace7] hover:border-[#deaf85]'>ล็อกอิน</a>
+            class='px-10 py-3 text-base rounded-md font-bold text-sky-100   bg-[#006abc] transition-all ease-in-out duration-300  hover:text-sky-100 hover:bg-[#001d64] hover:border-[#001d64]'>ล็อกอิน</a>
         </li>
       {% endif %}
         

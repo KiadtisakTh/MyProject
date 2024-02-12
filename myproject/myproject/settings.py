@@ -123,3 +123,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# กำหนด URL ที่เราต้องการให้ผู้ใช้เข้าสู่ระบบ
+LOGIN_URL = '/login/'

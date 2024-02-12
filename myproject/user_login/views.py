@@ -18,6 +18,7 @@ def login(req):
                 auth.login(req,user)
                 return redirect('/')
             else:
+                messages.error(req,"username หรือ รหัสผ่าน ไม่ถูกต้อง!")
                 return redirect('/login')
     return render(req,'login.html')
 
