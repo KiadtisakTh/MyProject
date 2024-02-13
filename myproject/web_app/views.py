@@ -11,3 +11,6 @@ def index(req):
 @login_required
 def about(req):
     return render(req,"about.html")
+
+def contact(req):
+    return render(req,"contact.html")

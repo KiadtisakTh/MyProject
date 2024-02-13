@@ -12,7 +12,7 @@
       </div>
       <!--Navbar authenticated-->
       {% if user.is_authenticated %}
-      <ul id="collapseMenu" class='lg:!flex ml-[28rem] lg:space-x-5 max-lg:space-y-2 max-lg:hidden max-lg:py-4 max-lg:w-full'>
+      <ul id="collapseMenu" class='lg:!flex ml-[38rem] lg:space-x-5 max-lg:space-y-2 max-lg:hidden max-lg:py-4 max-lg:w-full'>
         <li class='max-lg:border-b max-lg:bg-[#007bff] max-lg:py-2 px-3 max-lg:rounded'>
           <a href="{% url 'home' %}"
             class='lg:hover:text-sky-100 text-[#eee1ba] max-lg:text-white block font-bold text-[17px] '>หน้าหลัก</a>
@@ -20,11 +20,17 @@
         <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'about' %}"
             class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>เกี่ยวกับเรา</a>
         </li>
-        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="#"
+        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'service' %}"
             class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>บริการ ซัก รีด</a>
         </li>
         <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="#"
             class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>อัตราค่าบริการ</a>
+        </li>
+
+        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'contact' %}"
+          class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>ที่อยู่ซื้อหี</a>
+      </li>
+
       </ul>
       <div class="relative inline-block text-left">
         <div>
@@ -58,7 +64,7 @@
         <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'about' %}"
             class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>เกี่ยวกับเรา</a>
         </li>
-        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="#"
+        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'service' %}"
             class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>บริการ ซัก รีด</a>
         </li>
         <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="#"
