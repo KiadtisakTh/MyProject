@@ -8,7 +8,7 @@ def index(req):
     return render(req,"index.html")
 
 
-@login_required
+
 def about(req):
     return render(req,"about.html")
 

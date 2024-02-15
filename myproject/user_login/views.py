@@ -3,7 +3,10 @@ from django.contrib.auth.models import User , auth
 from django.contrib.auth import logout
 from django.contrib import auth
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from .forms import *
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
+
 
 # Create your views here.
 def login(req):
@@ -24,32 +27,21 @@ def login(req):
 
 
 def user_register(req):
-    email = "email"  # กำหนดค่า email เริ่มต้น
+    form = Register()
     if req.method == "POST":
-        username = req.POST.get("username", "")
-        email = req.POST.get("email", email)  # ใช้ค่า email เริ่มต้นในกรณีไม่มีค่าใน req.POST
-        password = req.POST.get("password", "")
-        password2 = req.POST.get("password2", "")
-        if username == '' or email == '' or password == '' or password2 == '':
-            return redirect("/register")
-        elif password != password2:
-            return redirect("/register")
-        else:
-            if User.objects.filter(username=username).exists():
-                return redirect("/register")
-            else:
-                user = User.objects.create_user(
-                    username=username,
-                    email=email,
-                    password=password,
-                )
-                user.save()
-                messages.success(req,"สร้างบันชีสำเร็จ")
-                return redirect("/")
-    return render(req, 'Register.html')
+         form = Register(req.POST)
+         if form.is_valid():
+            form.save()
+            messages.success(req,"สร้างบัญชีสำเร็จ")
+            return redirect("/")
+         else:
+             messages.error(req,"สร้างบัญชีไม่สำเร็จ")
+             form = Register()
+             return redirect("register")
+             
+    return render(req, 'Register.html',{"form":form})
 
 
-    
 
 
 

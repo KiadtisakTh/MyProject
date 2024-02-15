@@ -13,64 +13,100 @@
         {% endfor %}
 
         {% endif %}
-<div class="flex block items-center">
 
-    <div class=" items-center relative m-5 h-56 w-96 select-none rounded-lg border border-gray-100 p-6 shadow-lg">
-        <p class="text-xl font-black">Question 1</p>
-        <p class="mt-3">How satisfied are you with the new feature?</p>
-        <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-0 right-0 m-5 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <div class="mt-3 flex justify-between space-x-1">
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-sky-200 font-bold text-blue-900 hover:bg-blue-300">1</div>
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-sky-200 font-bold text-blue-900 hover:bg-blue-300">2</div>
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-sky-200 font-bold text-blue-900 hover:bg-blue-300">3</div>
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-sky-200 font-bold text-blue-900 hover:bg-blue-300">4</div>
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-sky-200 font-bold text-blue-900 hover:bg-blue-300">5</div>
-        </div>
-        <div class="mt-2 flex justify-between text-sm text-gray-400">
-          <p>Not satisfied</p>
-          <p>Very satisfied</p>
-        </div>
-      </div>
+        
+          <div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
+            <h2 class="text-2xl font-semibold mb-4 text-center" >เลือกรับบริการซัก รีด ที่คุณต้องการ</h2>
+            
+            <form action="{% url 'service' %}" method="POST">
+              {% csrf_token %}
+              <div class="mb-4">
+                <label for="ph" class="block text-gray-600">ชื่อ:</label>
+                <input type="text"  name="first_name" value="{{user.first_name}}" placeholder="ชื่อของคุณ" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" step="any">
+              </div>      
+
+              <div class="mb-4">
+                <label for="ph" class="block text-gray-600">นามสกุล:</label>
+                <input type="text"  name="last_name" value="{{user.last_name}}" placeholder="นามสกุล" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" step="any">
+              </div>  
+        
+              <div class="mb-4">
+                <label for="temperature" class="block text-gray-600">อีเมล:</label>
+                <input type="email"  value="{{user.email}}" name="email" placeholder="อีเมลของคุณ" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" step="any">
+              </div>
+        
+              <div class="mb-4">
+                <label for="humidity" class="block text-gray-600">เบอร์โทร:</label>
+                <input type="number"  name="number"  placeholder="เบอร์โทรของคุณ" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" step="any">
+              </div>
+        
+              
+              <div class="mb-4">
+                <label for="Laundry" class="block text-gray-600">การบริการ:</label>
+                <select id="Laundry" name="Laundry" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                  <option value="ซักรีด">ซักรีด</option>
+                  <option value="ซัก-พับ">ซัก-พับ</option>
+                  <option value="เเค่ซัก">เเค่ซัก</option>
+                  <option value="เเค่รีด">เเค่รีด</option>
+                </select>
+              </div>
+
+              <div class="mb-4">
+                <label for="date_start" class="block text-gray-600">วันที่ส่ง:</label>
+              <div class="block relative max-w-sm">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                  <svg class="w- h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                  </svg>
+                </div>
+                <input datepicker type="text" name="date_start" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="date_end" class="block text-gray-600">วันที่ต้องการรับผ้า:</label>
+            <div class="block relative max-w-sm">
+              <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                <svg class="w- h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                </svg>
+              </div>
+              <input datepicker type="text" name="date_end" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="clothes" class="block text-gray-600">รูปเเบบจัดเก็บผ้า:</label>
+            <select id="clothes" name="clothes" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+              <option value="พับทั้งหมด">รีด-พับ ทั้งหมด</option>
+              <option value="เเขวนทั้งหมด">รีด-เเขวน ทั้งหมด</option>
+              <option value="รีด-เเขวน เพียง/ชุดสูท/ชุดนักศึกษา/ชุดครุย">รีด-เเขวน เพียง/ชุดสูท/ชุดนักศึกษา/ชุดครุย</option>
+              <option value="เเค่รีด">เเค่รีด</option>
+            </select>
+          </div>
+
+
+              <div class="mb-4">
+                <label for="number_baskets" class="block text-gray-600">จำนวนตะกร้า:</label>
+                <input type="number"  name="number_baskets"  placeholder="ตัวอย่างเช่น '1' ตะกร้า" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" step="any">
+              </div>
       
-      <div class="relative m-5 h-56 w-96 select-none rounded-lg border border-gray-100 p-6 shadow-lg">
-        <p class="text-xl font-black">Question 2</p>
-        <p class="mt-3">How do you feel about the product?</p>
-        <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-0 right-0 m-5 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <div class="mt-3 flex justify-between space-x-1">
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-amber-200 text-xl font-bold hover:bg-amber-400">😤</div>
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-amber-200 text-xl font-bold hover:bg-amber-400">😒</div>
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-amber-200 text-xl font-bold hover:bg-amber-400">😐</div>
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-amber-200 text-xl font-bold hover:bg-amber-400">🙂</div>
-          <div class="flex h-12 w-16 cursor-pointer items-center justify-center rounded-md bg-amber-200 text-xl font-bold hover:bg-amber-400">😀</div>
-        </div>
-      </div>
-      
-      <div class="relative m-5 h-56 w-96 select-none rounded-lg border border-gray-100 p-6 shadow-lg">
-        <p class="text-xl font-black">Question 3</p>
-        <p class="mt-3">What are the reasons for cancelling the subscription?</p>
-        <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-0 right-0 m-5 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <div class="mt-3 flex flex-col justify-between space-y-1">
-          <label class="text-sm" for="answer-1">
-            <input class="accent-black" type="checkbox" name="answer-1" id="answer-1" />
-            Don't need it right now
-          </label>
-          <label class="text-sm" for="answer-1">
-            <input class="accent-black" type="checkbox" name="answer-1" id="answer-1" />
-            Wasn't that useful
-          </label>
-          <label class="text-sm" for="answer-1">
-            <input class="accent-black" type="checkbox" name="answer-1" id="answer-1" checked />
-            Too expensive
-          </label>
-        </div>
-      </div>
-      
-    </div>
-</div>
+        
+              <div class="mb-4">
+                <label for="note" class="block text-gray-600">หมายเหตุ:</label>
+                <input type="text" name="note" placeholder="ตัวอย่างเช่น 'ชุดสูทซักมือ' 'ชุดนักศึกษาเเค่ รีด'" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" step="any">
+              </div>
+        
+              
+        
+              <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">ตกลง</button>
+        
+        
+            </form>
+          </div>
+
+    
+
+  </div>
+        
 {% endblock %}

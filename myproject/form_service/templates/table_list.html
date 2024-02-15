@@ -1,0 +1,113 @@
+{% extends 'components/base.html' %}
+
+{% block title %} หน้าหลัก {% endblock %}
+
+{% block content %}
+
+<div class="flex-grow">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <span class="font-medium">{{message}}</span>
+            </div>
+        {% endfor %}
+
+        {% endif %}
+
+            
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    รหัสลูกค้า
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    ชื่อ
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    อีเมล
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    เบอร์โทร
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    บริการ
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    วันที่ส่ง
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    วันที่รับผ้า
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    รูปเเบบจัดเก็บผ้า
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    จำนวนตะกร้า
+                </th>
+                <!-- <th scope="col" class="px-6 py-3">
+                    หมายเหตุ
+                </th> -->
+                <th scope="col" class="px-[27px] py-3">
+                    เเก้ไข
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    ลบ
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for laundry in model_form %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap dark:text-white">
+                    {{laundry.id}}
+                </th>
+                <td class="px-6 py-4">
+                   คุณ{{laundry.first_name}}
+                </td>
+
+                <td id="dropdown" class="px-6 py-4">
+                   {{laundry.email}}
+                </td>
+                <td id="dropdown" class="px-6 py-4">
+                    0{{laundry.number}}
+                 </td>
+                 <td id="dropdown" class="px-6 py-4">
+                    {{laundry.Laundry}}
+                 </td>
+
+                 <td id="dropdown" class="px-6 py-4">
+                    {{laundry.date_start}}
+                 </td>
+
+                 <td id="dropdown" class="px-6 py-4">
+                    {{laundry.date_end}}
+                 </td>
+                 <td id="dropdown" class="px-6 py-4">
+                    {{laundry.clothes}}
+                 </td>
+                 <td id="dropdown" class="px-6 py-4">
+                    {{laundry.number_baskets}}
+                 </td>
+                 <!-- <td id="dropdown" class="px-6 py-4">
+                    {{laundry.note}}
+                 </td> -->
+                <td class="px-11 py-4 text-xs text-white ">
+                    <a href="/edit/{{s.id}}" class="rounded bg-green-600 p-2">เเก้ไข</a>
+                </td>
+                <td class="px-6 py-4 text-white">
+                    <a href="/delete/{{s.id}}" class="rounded bg-red-600 p-2" onclick="return confirm('คุณต้องการลบ {{s.name}} หรือไม่?')">ลบ</a>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+  
+
+
+{% endblock %}
