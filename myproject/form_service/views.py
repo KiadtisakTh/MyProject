@@ -3,6 +3,7 @@ from form_service.models import ModelForm
 from form_service.form import UserForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -35,9 +36,30 @@ def service_user(req):
     return render(req,"service.html" ,{"form":form})
 
 @login_required
+def edit_service(req,id):
+    user = ModelForm.objects.get(pk = id)
+    if req.method == "POST":
+        form = UserForm(req.POST,instance=user)
+        if form.is_valid():
+
+            form.save()
+            messages.success(req,"เเก้ไขข้อมูลสำเร็จ")
+            return redirect("/")
+
+    else:
+        form = UserForm(instance=user)
+    return render(req,"edit_service.html",{"form":form})
+
+@login_required
 def table_list(req):
     if req.user.is_superuser:
         model_form =  ModelForm.objects.all()
     else:
         model_form = ModelForm.objects.filter(first_name=req.user.first_name)
     return render(req, "table_list.html", {"model_form": model_form})
+
+def delete(req,id):
+    form = ModelForm.objects.get(pk = id)
+    form.delete()
+    messages.success(req,"ลบข้อมูลสำเร็จ")
+    return redirect(table_list)

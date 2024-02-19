@@ -93,11 +93,11 @@
                  <!-- <td id="dropdown" class="px-6 py-4">
                     {{laundry.note}}
                  </td> -->
-                <td class="px-11 py-4 text-xs text-white ">
-                    <a href="/edit/{{s.id}}" class="rounded bg-green-600 p-2">เเก้ไข</a>
+                <td class="px-11 py-4 text-xs bg-blue-500 text-white ">
+                    <a href="/edit_service/{{laundry.id}}">แก้ไขบริการ</a>
                 </td>
                 <td class="px-6 py-4 text-white">
-                    <a href="/delete/{{s.id}}" class="rounded bg-red-600 p-2" onclick="return confirm('คุณต้องการลบ {{s.name}} หรือไม่?')">ลบ</a>
+                    <a href="/delete/{{laundry.id}}" class="rounded bg-red-600 p-2" onclick="return confirm('คุณต้องการลบ order {{laundry.first_name}} หรือไม่?')">ลบ</a>
                     
                 </td>
             </tr>
