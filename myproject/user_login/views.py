@@ -48,23 +48,5 @@ def user_logout(req):
         # Redirect to a success page.
         return redirect("/")
 
-@login_required
-def edituser_profile(request):
-    user_profile = request.user.userprofile
 
-    if request.method == 'POST':
-        form = UserprofileForm(request.POST, instance=user_profile)
-        if form.is_valid():
-            user_profile.save()
-            messages.success(request, 'บันทึกข้อมูลเรียบร้อยแล้ว')
-            return redirect('/')
-        else:
-            messages.error(request, 'กรุณากรอกข้อมูลที่ถูกต้อง')
-    else:
-        form = UserprofileForm(instance=user_profile)
-    return render(request, 'app/user_profile.html', {'form': form})
 
-@login_required
-def user_profile(req):
-    return render(req, 'user_profile.html', {'user': req.user})
-        

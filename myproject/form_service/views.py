@@ -4,11 +4,13 @@ from form_service.form import UserForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from web_app.models import User_Profile
 
 
 # Create your views here.
 @login_required
 def service_user(req):
+    user_profile = User_Profile.objects.get(user = req.user)
     if req.method == "POST":
         #รับข้อมูล
         form = UserForm(req.POST)
@@ -33,7 +35,7 @@ def service_user(req):
             return redirect('/')
     else:
         form = UserForm()
-    return render(req,"service.html" ,{"form":form})
+    return render(req,"service.html" ,{"form":form,'user_profile': user_profile})
 
 @login_required
 def edit_service(req,id):

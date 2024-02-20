@@ -10,7 +10,7 @@
   {% if user.userprofile.profile_image %}
       <img class="" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image">
   {% else %}
-  <img class="profile-image" src="{% static 'path/to/default/profile/image.jpg' %}" alt="Default Profile Image">
+  <img class="profile-image" src="{% static 'path/to/default/web_app/image.jpg' %}" alt="Default Profile Image">
   {% endif %}
 </div>
   <h2>โปรไฟล์ของ {{ user.username }}</h2>

@@ -5,7 +5,7 @@ class ModelForm(models.Model):
     first_name = models.CharField(max_length = 100)
     last_name = models.CharField(max_length = 100)
     email = models.EmailField(null = True)
-    number = models.IntegerField(max_length = 10)
+    phone_number = models.CharField(max_length = 100,null=True, blank=True)
     Laundry = models.CharField(max_length = 100)
     date_start = models.DateField()
     date_end = models.DateField()
