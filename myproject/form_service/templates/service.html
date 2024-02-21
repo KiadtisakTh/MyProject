@@ -15,7 +15,7 @@
         {% endif %}
 
         
-          <div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
+          <div class="max-w-md mx-auto bg-white p-6 mt-10 rounded-md shadow-md">
             <h2 class="text-2xl font-semibold mb-4 text-center" >เลือกรับบริการซัก รีด ที่คุณต้องการ</h2>
             
             <form action="{% url 'service' %}" method="POST">
@@ -36,11 +36,10 @@
               </div>
         
               <div class="mb-4">
-                <label for="humidity" class="block text-gray-600">เบอร์โทร:</label>
-                <input type="text"  name="{{ user_profile.phone_number }}"  placeholder="เบอร์โทรของคุณ" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" step="any">
-              </div>
+                <label for="phone_number" class="block text-gray-600">เบอร์โทร:</label>
+                <input type="text" name="phone_number" value="{{ user.user_profile.phone_number }}" placeholder="เบอร์โทรของคุณ" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" step="any">
+            </div>
         
-              
               <div class="mb-4">
                 <label for="Laundry" class="block text-gray-600">การบริการ:</label>
                 <select id="Laundry" name="Laundry" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">

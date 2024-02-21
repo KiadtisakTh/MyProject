@@ -21,7 +21,7 @@ def service_user(req):
                 first_name=form.cleaned_data['first_name'],
                 last_name=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'],
-                number=form.cleaned_data['number'],
+                phone_number=form.cleaned_data['phone_number'],
                 Laundry=form.cleaned_data['Laundry'],
                 date_start=form.cleaned_data['date_start'],
                 date_end=form.cleaned_data['date_end'],

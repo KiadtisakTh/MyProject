@@ -7,11 +7,11 @@
   <div class="flex justify-center items-center mt-10 w-full">
     <div class="bg-blue-200 w-[35rem] rounded-lg shadow-md p-6">
       <div class="flex items-center mb-4">
-        {% if userprofile.profile_image %}
+        {% if user_profile.profile_image.url != none %}
 
-        <img class="profile-image h-24 w-24 rounded-full mr-4" src="{{ form.instance.profile_image.url }}" alt="Profile Image">
+        <img class="profile-image h-24 w-24 rounded-full mr-4" src="{{ user_profile.profile_image.url }}" alt="Profile Image">
         {% else %}
-        <img class="profile-image h-24 w-24 rounded-full mr-4" src="{{ user_profile.profile_image.url}}" alt="Default Profile Image">
+        <img class="profile-image h-24 w-24 rounded-full mr-4" src="{% static 'image_profile_example\dog.jpg' %}" alt="Default Profile Image">
         {% endif %}
         <div>
           <h2 class="text-xl font-bold">โปรไฟล์ของ {{ user.username }}</h2>

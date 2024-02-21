@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from web_app.models import User_Profile
 from web_app.forms import UserprofileForm
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your views here.
@@ -20,8 +21,11 @@ def contact(req):
 
 @login_required
 def user_profile(req):
-    user_profile = User_Profile.objects.get(user = req.user)
-    return render(req, 'user_profile.html', {'user_profile': user_profile})
+    try:
+        user_profile = User_Profile.objects.get(user=req.user)
+        return render(req, 'user_profile.html', {'user_profile': user_profile})
+    except ObjectDoesNotExist:
+        return redirect('edit_profile')
 
 def update_profile_image(request):
     if request.method == 'POST':

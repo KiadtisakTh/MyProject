@@ -11,9 +11,25 @@
         <span class="font-medium">{{message}}</span>
       </div>
     {% endfor %}
-    
 {% endif %}
 
+<h1 class=" text-center mt-3 text-5xl font-bold">เอส & ฮาร์ท ซัก รีด</h1>
+้     <h2 class="text-center  mb-5 text-3xl font-semibold">บริการ รับ ซัก เสื้อ ผ้าม่าน ผ้าห่ม ร้องเท้า</h2>
+      <div class="flex justify-center">
+        <label class="bg-blue-200 mt-4 rounded-lg py-2 px-[20rem] ">
+            <a href="{% url 'service' %}">
+              รับบริการตอนนี้
+          </a>
+        </label>
+        </div>
+      <div class="flex justify-center">
+        <label class="bg-white mt-4 rounded-lg py-2 px-[15rem] ">
+            <a href="{% url 'service' %}">
+              ตรวจสอบราคา
+          </a>
+        </label>
+        </div>
+  
 
 </div>
 {% endblock %}

@@ -20,16 +20,7 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    รหัสลูกค้า
-                </th>
-                <th scope="col" class="px-6 py-3">
                     ชื่อ
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    อีเมล
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    เบอร์โทร
                 </th>
                 <th scope="col" class="px-6 py-3">
                     บริการ
@@ -60,19 +51,9 @@
         <tbody>
             {% for laundry in model_form %}
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap dark:text-white">
-                    {{laundry.id}}
-                </th>
                 <td class="px-6 py-4">
                    คุณ{{laundry.first_name}}
                 </td>
-
-                <td id="dropdown" class="px-6 py-4">
-                   {{laundry.email}}
-                </td>
-                <td id="dropdown" class="px-6 py-4">
-                    0{{laundry.number}}
-                 </td>
                  <td id="dropdown" class="px-6 py-4">
                     {{laundry.Laundry}}
                  </td>
@@ -93,7 +74,7 @@
                  <!-- <td id="dropdown" class="px-6 py-4">
                     {{laundry.note}}
                  </td> -->
-                <td class="px-11 py-4 text-xs bg-blue-500 text-white ">
+                <td class="px-7 py-4 text-xs bg-blue-500 text-white ">
                     <a href="/edit_service/{{laundry.id}}">แก้ไขบริการ</a>
                 </td>
                 <td class="px-6 py-4 text-white">
