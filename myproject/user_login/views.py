@@ -33,8 +33,7 @@ def user_register(req):
          form = Register(req.POST)
          if form.is_valid():
             form.save()
-            messages.success(req,"สร้างบัญชีสำเร็จ")
-            return redirect("/")
+            return redirect("login")
          else:
              messages.error(req,"สร้างบัญชีไม่สำเร็จ")
              form = Register()

@@ -10,7 +10,6 @@ from web_app.models import User_Profile
 # Create your views here.
 @login_required
 def service_user(req):
-    user_profile = User_Profile.objects.get(user = req.user)
     if req.method == "POST":
         #รับข้อมูล
         form = UserForm(req.POST)
@@ -35,7 +34,7 @@ def service_user(req):
             return redirect('/')
     else:
         form = UserForm()
-    return render(req,"service.html" ,{"form":form,'user_profile': user_profile})
+    return render(req,"service.html" ,{"form":form})
 
 @login_required
 def edit_service(req,id):
