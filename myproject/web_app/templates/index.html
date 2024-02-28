@@ -1,35 +1,127 @@
 {% extends 'components/base.html' %}
 
 {% block title %} หน้าหลัก {% endblock %}
-
+{% load static %}
 {% block content %}
 
 <div class="flex-grow">
-{% if messages %}
+    {% if messages %}
     {% for message in messages %}
-    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+        role="alert">
         <span class="font-medium">{{message}}</span>
-      </div>
+    </div>
     {% endfor %}
-{% endif %}
+    {% endif %}
 
-<h1 class=" text-center mt-3 text-5xl font-bold">เอส & ฮาร์ท ซัก รีด</h1>
-้     <h2 class="text-center  mb-5 text-3xl font-semibold">บริการ รับ ซัก เสื้อ ผ้าม่าน ผ้าห่ม ร้องเท้า</h2>
-      <div class="flex justify-center">
+    <h1 class=" text-center mt-3 text-5xl font-bold">เอส & ฮาร์ท ซัก รีด</h1>
+    ้ <h2 class="text-center  mb-5 text-3xl font-semibold">บริการ รับ ซัก เสื้อ ผ้าม่าน ผ้าห่ม ร้องเท้า</h2>
+    <div class="flex justify-center">
         <label class="bg-blue-200 mt-4 rounded-lg py-2 px-[20rem] ">
             <a href="{% url 'service' %}">
-              รับบริการตอนนี้
-          </a>
+                รับบริการตอนนี้
+            </a>
         </label>
-        </div>
-      <div class="flex justify-center">
+    </div>
+    <div class="flex justify-center">
         <label class="bg-white mt-4 rounded-lg py-2 px-[15rem] ">
-            <a href="{% url 'about' %}">
-              ตรวจสอบราคา
-          </a>
+            <a href="#">
+                ตรวจสอบราคา
+            </a>
         </label>
+    </div>
+    <!-- Main Content -->
+    <div class="container mx-auto mt-8">
+        <h1 class="text-3xl font-bold text-center mb-8">บริการของเรา</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service Card 1 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4">บริการซักรีด</h2>
+                <p class="text-gray-700">บริการซักรีดผ่านเว็บไซต์ของเรา ด้วยบริการที่มีคุณภาพและราคาที่เหมาะสม</p>
+            </div>
+            <!-- Service Card 2 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4">บริการรับ-ส่งฟรี</h2>
+                <p class="text-gray-700">เพื่อความสะดวกสบายของลูกค้า รับ-ส่ง</p>
+            </div>
+            <!-- Service Card 3 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4">บริการด่วน 24 ชั่วโมง</h2>
+                <p class="text-gray-700">มีบริการด่วน 24 ชั่วโมง เพื่อความสะดวกของลูกค้าในการรับ-ส่ง</p>
+            </div>
         </div>
-  
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+
+<div class="justify-center flex mt-10 max-w-screen-2xl">
+    <div class="border container">
+
+        <div
+            class="w3-content w3-display-container max-w-screen-lg h-96 overflow-hidden relative border-2 border-[#3b3b3b] rounded-lg">
+
+            <img class="mySlides rounded-lg object-cover h-full absolute inset-0 w-full"
+                src="{% static 'slide_image/1.jpg' %}" style="width: 100%;">
+            <img class="mySlides rounded-lg object-cover h-full absolute inset-0 w-full"
+                src="{% static 'slide_image/2.png' %}" style="width: 100%;">
+            <img class="mySlides rounded-lg object-cover h-full absolute inset-0 w-full"
+                src="{% static 'slide_image/3.jpg' %}" style="width: 100%;">
+            <img class="mySlides rounded-lg object-cover h-full absolute inset-0 w-full"
+                src="{% static 'slide_image/4.jpg' %}" style="width: 100%;">
+
+
+            <button
+                class="w3-button w3-black w3-display-left text-white absolute top-1/2 left-0 transform -translate-y-1/2"
+                onclick="plusDivs(-1)">&#10094;</button>
+            <button
+                class="w3-button w3-black w3-display-right text-white absolute top-1/2 right-0 transform -translate-y-1/2"
+                onclick="plusDivs(1)">&#10095;</button>
+        </div>
+        <script>
+            var slideIndex = 1;
+            showDivs(slideIndex);
+        
+            setInterval(function () {
+                plusDivs(1);
+            }, 3000);
+        
+            function plusDivs(n) {
+                showDivs(slideIndex += n);
+            }
+        
+            function showDivs(n) {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                if (n > x.length) { slideIndex = 1 }
+                if (n < 1) { slideIndex = x.length }
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                x[slideIndex - 1].style.display = "block";
+            }
+        </script>
+
+    </div>
+</div>
+
+
+
+<div class="bg-[#] text-black py-16 mt-6">
+    <div class="container mx-auto text-center">
+        <p class="text-2xl font-bold mb-4">ติดต่อเรา</p>
+        <p>มีคำถามหรือต้องการให้เราช่วยเหลือ ติดต่อเราได้ที่</p>
+        <p>Email: info@example.com</p>
+        <p>โทร: 012-345-6789</p>
+    </div>
+</div>
+
+
+
+
 
 </div>
 {% endblock %}

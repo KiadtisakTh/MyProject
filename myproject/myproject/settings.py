@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-p(gg1a*_=c#g@flsx_ozy0fa^px#pav*l0^(a#x478%31c6481
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:80','http://127.0.0.1:80','https://f1f5-49-229-22-10.ngrok-free.app']
 
 
 # Application definition
@@ -125,10 +126,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'staticfiles'),
 ]
+STATIC_ROOT =  'static/'
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = BASE_DIR / "web_app/media"
