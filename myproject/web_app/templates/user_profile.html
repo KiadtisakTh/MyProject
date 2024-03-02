@@ -1,6 +1,6 @@
 {% extends 'components/base.html' %}
 {% load static %}
-{% block title %} User Profile {% endblock %}
+{% block title %} หน้าโปรไฟล์ {% endblock %}
 
 {% block content %}
 <div class="flex-grow">
@@ -11,7 +11,7 @@
 
         <img class="profile-image h-24 w-24 rounded-full mr-4" src="{{ user_profile.profile_image.url }}" alt="Profile Image">
         {% else %}
-        <img class="profile-image h-24 w-24 rounded-full mr-4" src="{% static 'image_profile_example\dog.jpg' %}" alt="Default Profile Image">
+        <img class="profile-image h-24 w-24 rounded-full mr-4" src="{% static 'image_profile_example\1.png' %}" alt="Default Profile Image">
         {% endif %}
         <div>
           <h2 class="text-xl font-bold">โปรไฟล์ของ {{ user.username }}</h2>

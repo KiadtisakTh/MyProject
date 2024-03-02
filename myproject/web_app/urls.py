@@ -1,4 +1,4 @@
-from django.urls import path , include
+from django.urls import path 
 from web_app import views
 from .views import *
 

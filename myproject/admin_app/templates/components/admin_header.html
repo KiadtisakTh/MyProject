@@ -1,0 +1,35 @@
+{% load static %}
+
+<header class='shadow-md py-4 px-4 sm:px-10 bg-[#003083] font-[sans-serif] min-h-[100px]'>
+  
+    <div class='flex  items-center justify-between gap-5 relative'>
+      
+      <div class="text-center justify-center">
+      
+        <a class="font-bold text-yellow-100">ผู้ดูเเลระบบ</a>
+   
+    </div>
+    
+      
+      <!--Navbar authenticated-->
+      {% if user.is_authenticated %}
+      <ul id="collapseMenu" class='flex  justify-end py-4 space-x-4 w-full'>
+        <li class='max-lg:border-b max-lg:bg-[#007bff] max-lg:py-2 px-3 max-lg:rounded'>
+          <a href="{% url 'home' %}"
+            class='lg:hover:text-sky-100 text-[#eee1ba] max-lg:text-white block font-bold text-[17px] '>หน้าหลัก</a>
+        </li>
+        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'service' %}"
+            class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>บริการ ซัก รีด</a>
+        </li>
+        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="#"
+            class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>อัตราค่าบริการ</a>
+        </li>
+
+        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'logout' %}"
+          class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>ออกจากระบบ</a>
+      </li>
+    </ul>
+
+    {% endif %}
+    </div>
+  </header>

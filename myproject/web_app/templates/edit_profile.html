@@ -1,6 +1,6 @@
 {% extends 'components/base.html' %}
 {% load static %}
-{% block title %} หน้าหลัก {% endblock %}
+{% block title %} เเก้ไขข้อมูลส่วนตัว {% endblock %}
 
 {% block content %}
 <div class="flex-grow">
@@ -26,12 +26,12 @@
     
     <div class="mb-4">
       <label for="phone_number" class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
-      <input type="tel" name="phone_number" id="phone_number" value="{{ form.instance.phone_number }}" class="mt-1 px-4 py-2 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
+      <input type="text" name="phone_number"  value="{{ form.instance.phone_number }}" class="mt-1 px-4 py-2 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
     </div>
     
     <div class="mb-4">
       <label for="address" class="block text-sm font-medium text-gray-700">ที่อยู่</label>
-      <textarea name="address" id="address" rows="3" class="mt-1 px-4 py-2 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">{{ form.instance.address }}</textarea>
+      <textarea name="address" id="address" rows="3" class="mt-1 px-4 py-2 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" value="{{ form.instance.address }}"></textarea>
     </div>
 
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">บันทึก</button> 

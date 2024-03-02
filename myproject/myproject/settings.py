@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "form_service",
     "crispy_forms",
     "crispy_tailwind",
+    "admin_app",
 ]
 
 

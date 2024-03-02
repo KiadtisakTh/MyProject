@@ -53,10 +53,7 @@ def edit_service(req,id):
 
 @login_required
 def table_list(req):
-    if req.user.is_superuser:
-        model_form =  ModelForm.objects.all()
-    else:
-        model_form = ModelForm.objects.filter(first_name=req.user.first_name)
+    model_form = ModelForm.objects.filter(first_name=req.user.first_name)
     return render(req, "table_list.html", {"model_form": model_form})
 
 def delete(req,id):

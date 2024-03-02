@@ -20,12 +20,13 @@ def login(req):
             user = auth.authenticate(username=username,password=password)
             if user is not None:
                 auth.login(req,user)
+                if req.user.is_superuser:
+                    return redirect('/admin_home')
                 return redirect('/')
             else:
-                messages.error(req,"username หรือ รหัสผ่าน ไม่ถูกต้อง!")
+                messages.error(req, "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!")
                 return redirect('/login')
-    return render(req,'login.html')
-
+    return render(req, 'login.html')
 
 def user_register(req):
     form = Register()

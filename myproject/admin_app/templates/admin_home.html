@@ -1,0 +1,84 @@
+{% extends 'components/base_admin.html' %}
+
+{% block title %} รายการส่งซัก {% endblock %}
+
+{% block content %}
+
+<div class="flex-grow">
+
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        ชื่อ
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        บริการ
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        วันที่ส่ง
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        วันที่รับผ้า
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        รูปเเบบจัดเก็บผ้า
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        จำนวนตะกร้า
+                    </th>
+                     <th scope="col" class="px-6 py-3">
+                        หมายเหตุ
+                    </th> 
+                    <th scope="col" class="px-[27px] py-3">
+                        เเก้ไข
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        ลบ
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for laundry in list_user %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4">
+                       คุณ{{laundry.first_name}}
+                    </td>
+                     <td id="dropdown" class="px-6 py-4">
+                        {{laundry.Laundry}}
+                     </td>
+    
+                     <td id="dropdown" class="px-6 py-4">
+                        {{laundry.date_start}}
+                     </td>
+    
+                     <td id="dropdown" class="px-6 py-4">
+                        {{laundry.date_end}}
+                     </td>
+                     <td id="dropdown" class="px-6 py-4">
+                        {{laundry.clothes}}
+                     </td>
+                     <td id="dropdown" class="px-6 py-4">
+                        {{laundry.number_baskets}}
+                     </td>
+                     <td id="dropdown" class="px-6 py-4">
+                        {{laundry.note}}
+                     </td>
+                    <td class="px-7 py-4 text-xs bg-blue-500 text-white ">
+                        <a href="/edit_service/{{laundry.id}}">แก้ไขบริการ</a>
+                    </td>
+                    <td class="px-6 py-4 text-white">
+                        <a href="/delete/{{laundry.id}}" class="rounded bg-red-600 p-2" onclick="return confirm('คุณต้องการลบ order {{laundry.first_name}} หรือไม่?')">ลบ</a>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+    
+</div>
+
+{% endblock %}
