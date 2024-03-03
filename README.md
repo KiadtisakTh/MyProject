@@ -10,3 +10,9 @@ python -m pip freeze > requirements.txt<br>
 3.ใช้คำสั่ง<br>
 python -m pip install -r requirements.txt<br>
 เสร็จ<br>
+
+# install Crispy form <br>
+pip install django-crispy-forms <br>
+
+# install Crispy tailwind <br>
+pip install crispy-tailwind <br>
