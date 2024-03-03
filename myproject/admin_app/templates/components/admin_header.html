@@ -2,15 +2,16 @@
 
 <header class='shadow-md py-4 px-4 sm:px-10 bg-[#003083] font-[sans-serif] min-h-[100px]'>
   
-    <div class='flex  items-center justify-between gap-5 relative'>
-      
-      <div class="text-center justify-center">
-      
-        <a class="font-bold text-yellow-100">ผู้ดูเเลระบบ</a>
-   
-    </div>
+  <div class='flex  items-center justify-between gap-5 relative'>
+  
+    <div class="flex justify-start py-4 space-x-4 w-full">
     
-      
+      <div class="max-lg:border-b max-lg:bg-blue-200 max-lg:py-2 px-3 max-lg:rounded">
+        <a class="font-bold text-white  text-lg">ผู้ดูเเลระบบ</a>
+      </div>
+    </div>
+
+  
       <!--Navbar authenticated-->
       {% if user.is_authenticated %}
       <ul id="collapseMenu" class='flex  justify-end py-4 space-x-4 w-full'>
