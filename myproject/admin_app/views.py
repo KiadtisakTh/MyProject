@@ -26,5 +26,5 @@ def update_status(req,id):
     if req.method == "POST":
         order.status = req.POST['status']
         order.save()
-        return redirect("/admin_home/admin_order")
+        return redirect("/admin_home")
         

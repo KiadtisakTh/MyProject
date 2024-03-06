@@ -7,6 +7,8 @@ ORDER_CHOICE = (
     ("1","เสร็จเเล้ว"),
     ("2","ยังไม่เสร็จ"),
     ("3","รอการส่งซัก"),
+    ("4","ยกเลิก"),
+ 
 )
 class ModelForm(models.Model):
     first_name = models.CharField(max_length = 100)

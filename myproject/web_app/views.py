@@ -10,6 +10,9 @@ from django.core.exceptions import ObjectDoesNotExist
 def index(req):
     return render(req,"index.html")
 
+def service_rates(req):
+    return render(req,"Service_rates.html")
+
 
 def contact(req):
     return render(req,"contact.html")

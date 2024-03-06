@@ -20,7 +20,7 @@
         <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'service' %}"
             class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>บริการ ซัก รีด</a>
         </li>
-        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="#"
+        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'service_rates' %}"
             class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>อัตราค่าบริการ</a>
         </li>
 
@@ -46,7 +46,7 @@
             <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
             <a href="{% url 'user_profile' %}" class="bg-[#001d64] block px-4 py-2 text-sm hover:text-[#eee1ba] hover:bg-[#006abc]" role="menuitem" tabindex="-1" id="menu-item-0">เเก้ไขข้อมูลส่วนตัว</a>
             <a href="{% url 'table_list' %}" class="bg-[#001d64] block px-4 py-2 text-sm hover:text-[#eee1ba] hover:bg-[#006abc]" role="menuitem" tabindex="-1" id="menu-item-1">รายการส่งซัก-รีด</a>
-            <a href="#" class="bg-[#001d64] block px-4 py-2 text-sm hover:text-[#eee1ba] hover:bg-[#006abc]" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
+
             <a href="{% url 'logout' %}" class="bg-[#001d64] block px-4 py-2 text-sm hover:text-[#eee1ba] hover:bg-[#006abc]" role="menuitem" tabindex="-1" id="menu-item-2">ออกจากระบบ</a>
           </div>
         </div>
@@ -64,13 +64,15 @@
         <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'service' %}"
             class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>บริการ ซัก รีด</a>
         </li>
-        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="#"
+        <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'service_rates' %}"
             class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>อัตราค่าบริการ</a>
         </li>
 
         <li class='max-lg:border-b max-lg:py-2  max-lg:rounded'><a href="{% url 'contact' %}"
           class='lg:hover:text-sky-100 text-[#eee1ba] block font-bold text-[17px]'>ที่ตั้งร้าน</a>
       </li>
+
+      
 
         <li class='max-lg:border-b max-lg:bg-[#007bff] max-lg:py-2 max-lg:rounded'>
           <a href="{% url 'register' %}"

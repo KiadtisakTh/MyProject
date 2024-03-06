@@ -25,12 +25,7 @@
                 <th scope="col" class="px-6 py-3">
                     บริการ
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    วันที่ส่ง
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    วันที่รับผ้า
-                </th>
+    
                 <th scope="col" class="px-6 py-3">
                     รูปเเบบจัดเก็บผ้า
                 </th>
@@ -40,17 +35,26 @@
                 <!-- <th scope="col" class="px-6 py-3">
                     หมายเหตุ
                 </th> -->
+                {% if user.is_staff %}
                 <th scope="col" class="px-[27px] py-3">
                     เเก้ไข
                 </th>
+                {% endif %}
                 <th scope="col" class="px-6 py-3">
-                    ลบ
+                    สถานะ
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    ยกเลิก
                 </th>
             </tr>
         </thead>
         <tbody>
             {% for laundry in model_form %}
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4">
+                    {{laundry.id}}
+                 </td>
+
                 <td class="px-6 py-4">
                    คุณ{{laundry.first_name}}
                 </td>
@@ -59,28 +63,45 @@
                  </td>
 
                  <td id="dropdown" class="px-6 py-4">
-                    {{laundry.date_start}}
-                 </td>
-
-                 <td id="dropdown" class="px-6 py-4">
-                    {{laundry.date_end}}
-                 </td>
-                 <td id="dropdown" class="px-6 py-4">
                     {{laundry.clothes}}
                  </td>
                  <td id="dropdown" class="px-6 py-4">
-                    {{laundry.number_baskets}}
+                    <!-- <form action="{% url 'status_update' user.id %}" method="POST">
+                        {% csrf_token %}
+                        <select name="status" id="countries" class="w-full p-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="max-width: 150px;">
+                            <option>{{user.get_status_display}}</option>
+                            <option value="1" >เสร็จเเล้ว</option>
+                            <option value="2">ยังไม่เสร็จ</option>
+                            <option value="3" >รอการส่งซัก</option>
+                            <option value="4" >ยกเลิก</option>
+                        </select>
+                        
+                            <button type="submit" class="mt-4 bg-yellow-500 text-white px-1 py-1 rounded-md font-semibold hover:bg-yellow-600">อัพเดทสถานะ</button>
+                        </div>
+                    </form> -->
+                    <label for="">{{laundry.get_status_display}}</label>
                  </td>
                  <!-- <td id="dropdown" class="px-6 py-4">
                     {{laundry.note}}
                  </td> -->
-                <td class="px-7 py-4 text-xs bg-blue-500 text-white ">
-                    <a href="/edit_service/{{laundry.id}}">แก้ไขบริการ</a>
+                {% if user.is_staff %}
+                <td class="px-7 py-4 text-xs">
+                    <a href="/edit_service/{{laundry.id}}" class="rounded bg-red-600 p-2">แก้ไขบริการ</a>
                 </td>
+                {% endif %}
+                {% if laundry.status == '3' %}
                 <td class="px-6 py-4 text-white">
-                    <a href="/delete/{{laundry.id}}" class="rounded bg-red-600 p-2" onclick="return confirm('คุณต้องการลบ order {{laundry.first_name}} หรือไม่?')">ลบ</a>
+                    <a href="/delete/{{laundry.id}}" class="rounded bg-red-600 p-2" onclick="return confirm('คุณต้องการลบ order {{laundry.first_name}} หรือไม่?')">ยกเลิก</a>
                     
                 </td>
+
+                {% else %}
+                <td class="px-6 py-4 text-black">
+                    <p class="rounded  p-2" >ยกเลิกไม่ได้</p>
+                    
+                </td>
+                
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

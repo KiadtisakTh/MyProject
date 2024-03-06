@@ -25,19 +25,21 @@ def service_user(req):
                 date_start=form.cleaned_data['date_start'],
                 date_end=form.cleaned_data['date_end'],
                 clothes=form.cleaned_data['clothes'],
+                number_clothes=form.cleaned_data['number_clothes'],
                 number_baskets=form.cleaned_data['number_baskets'],
                 note=form.cleaned_data['note'],
             )
             # Save the instance to the database
             user_model.save()
             # Redirect to a success page or do something else
-            return redirect('/')
+            return redirect('table_list')
     else:
         form = UserForm()
     return render(req,"service.html" ,{"form":form})
 
 @login_required
 def edit_service(req,id):
+    
     user = ModelForm.objects.get(pk = id)
     if req.method == "POST":
         form = UserForm(req.POST,instance=user)
@@ -49,7 +51,7 @@ def edit_service(req,id):
 
     else:
         form = UserForm(instance=user)
-    return render(req,"edit_service.html",{"form":form})
+    return render(req,"edit_service.html",{"form":form , "model_form":user})
 
 @login_required
 def table_list(req):
