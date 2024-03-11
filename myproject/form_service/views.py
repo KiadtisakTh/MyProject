@@ -11,28 +11,23 @@ from web_app.models import User_Profile
 @login_required
 def service_user(req):
     if req.method == "POST":
-        #รับข้อมูล
-        form = UserForm(req.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            # Create an instance of your model with data from the form
-            user_model = ModelForm(
-                first_name=form.cleaned_data['first_name'],
-                last_name=form.cleaned_data['last_name'],
-                email=form.cleaned_data['email'],
-                phone_number=form.cleaned_data['phone_number'],
-                Laundry=form.cleaned_data['Laundry'],
-                date_start=form.cleaned_data['date_start'],
-                date_end=form.cleaned_data['date_end'],
-                clothes=form.cleaned_data['clothes'],
-                number_clothes=form.cleaned_data['number_clothes'],
-                number_baskets=form.cleaned_data['number_baskets'],
-                note=form.cleaned_data['note'],
-            )
-            # Save the instance to the database
-            user_model.save()
-            # Redirect to a success page or do something else
-            return redirect('table_list')
+        user_model = ModelForm.objects.create(
+            first_name = req.POST.get('first_name'),
+            last_name=req.POST.get('last_name'),
+            email=req.POST.get('email'),
+            phone_number=req.POST.get('phone_number'),
+            Laundry=req.POST.get('Laundry'),
+            date_start=req.POST.get('date_start'),
+            date_end=req.POST.get('date_end'),
+            clothes=req.POST.get('clothes'),
+            number_clothes=req.POST.get('number_clothes'),
+            number_baskets=req.POST.get('number_baskets'),
+            note=req.POST.get('note'),
+        )
+        # Save the instance to the database
+        user_model.save()
+        # Redirect to a success page or do something else
+        return redirect('table_list')
     else:
         form = UserForm()
     return render(req,"service.html" ,{"form":form})
