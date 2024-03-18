@@ -41,20 +41,31 @@ def edit_service(req,id):
         if form.is_valid():
 
             form.save()
-            messages.success(req,"เเก้ไขข้อมูลสำเร็จ")
-            return redirect("/")
+            return redirect("table_list")
 
     else:
         form = UserForm(instance=user)
     return render(req,"edit_service.html",{"form":form , "model_form":user})
 
+
+
 @login_required
 def table_list(req):
+    if req.method == 'POST':
+        cancel_button_value = req.POST.get('cancel_button')
+        if cancel_button_value:  # ตรวจสอบว่ามีค่า cancel_button หรือไม่
+            try:
+                order_to_cancel = ModelForm.objects.get(id=cancel_button_value)
+                order_to_cancel.status = '4' 
+                order_to_cancel.save()
+            except ModelForm.DoesNotExist:
+                pass  # กรณีไม่พบคำสั่งซักผ้าที่ต้องการยกเลิก ไม่ต้องทำอะไร
+        return redirect('table_list')
+
     model_form = ModelForm.objects.filter(first_name=req.user.first_name)
+    model_form = model_form.exclude(status='4')
     return render(req, "table_list.html", {"model_form": model_form})
 
-def delete(req,id):
-    form = ModelForm.objects.get(pk = id)
-    form.delete()
-    messages.success(req,"ลบข้อมูลสำเร็จ")
-    return redirect(table_list)
+def detail(req,id):
+    order = ModelForm.objects.get(pk=id)
+    return render(req,'detail.html',{'order':order})

@@ -1,0 +1,45 @@
+{% extends 'components/base.html' %}
+
+{% block title %} รายการส่งซัก {% endblock %}
+
+{% block content %}
+
+<div class="flex-grow">
+    <body style="background-color: #c3e7ff;">
+        <div class="container mx-auto py-10">
+            <h1 class="text-3xl font-bold text-center mb-10">รายละเอียดส่งซัก</h1>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-bold">รหัสคำสั่งซื้อ: {{order.id}}</h2>
+                    <span class="text-gray-600">สถานะ: {{order.get_status_display}}</span>
+                </div>
+                <hr class="my-4">
+               
+                <div class="flex items-center mb-4">
+                    <div>
+                        <h3 class="font-bold text-lg">คุณ{{order.first_name}} {{order.last_name}}</h3>
+                        <p class="text-base font-semibold text-gray-700">email: <a class="font-bold text-black ">{{order.email}}</a></p>
+                        <p class="text-base font-semibold text-gray-700">การบริการ: <a class="font-bold text-black">{{order.Laundry}}</a></p>
+                        <p class="text-base font-semibold text-gray-700">วันที่ส่ง: <a class="font-bold text-black">{{order.date_start}}</a></p>
+                        <p class="text-base font-semibold text-gray-700">วันที่ต้องการรับผ้า: <a class="font-bold text-black">{{order.date_end}}</a></p>
+                        <p class="text-base font-semibold text-gray-700">รูปเเบบจัดเก็บผ้า: <a class="font-bold text-black">{{order.clothes}}</a></p>
+                        <p class="text-base font-semibold text-gray-700">จำนวนผ้า: <a class="font-bold text-black">{{order.number_clothes}}</a></p>
+                        <p class="text-base font-semibold text-gray-700">จำนวนตะกร้า: <a class="font-bold text-black">{{order.number_baskets}}</a></p>
+                        <p class="text-base font-semibold text-gray-700">หมายเหตุ: <a class="font-bold text-black">{{order.note}}</a></p>
+                    </div>
+                </div>
+  
+   
+                
+                <div class="flex justify-between items-center mt-8">
+                    <h3 class="text-lg font-bold">Total Amount</h3>
+                    {{order.note}}
+                    
+                </div>
+
+            </div>
+        </div>
+    </body>
+
+</div>
+{% endblock %}

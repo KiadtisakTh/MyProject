@@ -52,7 +52,25 @@
                      <td id="dropdown" class="px-6 py-4">
                         {{user.date_end}}
                      </td>
-                     <td id="dropdown" class="px-3 py-4">
+                                        
+                    {% if user.status == '4' %}
+                    <td class="px-6 py-4">
+                        {{user.get_status_display}}
+                     </td>
+
+                         
+                    <td id="dropdown" class="px-6 py-4">
+                            <a href="{% url 'admin_detail' user.id %}">รายละเอียด</a>
+                    </td>                   
+                    
+
+                     <td>
+                     </td>
+                    <td class="px-4 py-4 text-white">
+                        <a href="/delete/{{user.id}}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-5" onclick="return confirm('คุณต้องการลบ order {{laundry.first_name}} หรือไม่?')">ลบ</a>    
+                    </td>
+                    {% else %}
+                     <td id="dropdown" class="px-1 py-4">
                         <form action="{% url 'status_update' user.id %}" method="POST">
                             {% csrf_token %}
                             <select name="status" id="countries" class="w-full p-1 bg-sky-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="max-width: 150px;">
@@ -66,28 +84,18 @@
                             </div>
                         </form>
 
-                        <!-- <label>{{user.get_status_display}}</label>
-                        {% if user.status == '3' %}
-                        <a href="" class="p-2 rounded-lg border hover:bg-slate-300">ยกเลิก</a>
-                        <a href="" class="p-2 rounded-lg border hover:bg-slate-300">รับผ้า</a>
-                        {% elif user.status == '2' %}
-                        <a href="" class="p-2 rounded-lg border hover:bg-slate-300">เสร็จเเล้ว</a>
-                        {% elif user.status == '1' %}
-                       
-                        <a href="" class="p-2 rounded-lg border hover:bg-slate-300">ส่งกลับ</a>
-                        {% endif %}
-                         -->
                      </td>
                      <td id="dropdown" class="px-6 py-4">
                         <a href="{% url 'admin_detail' user.id %}">รายละเอียด</a>
                      </td>
-                    <td class="px-7 py-4  text-white ">
-                        <a href="/edit_service/{{user.id}} " class="rounded bg-green-600 hover:bg-green-500 p-2 px-3">แก้ไข</a>
+                    <td class="px-4 py-4  text-white ">
+                        <a href="/user_service/{{user.id}} " class="rounded bg-green-600 hover:bg-green-500 p-2 px-3">แก้ไข</a>
                     </td>
-                    <td class="px-6 py-4 text-white">
-                        <a href="/delete/{{user.id}}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-5" onclick="return confirm('คุณต้องการลบ order {{laundry.first_name}} หรือไม่?')">ลบ</a>
-                        
+
+                    <td class="px-4 py-4 text-white">
+                        <a href="/delete/{{user.id}}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-5" onclick="return confirm('คุณต้องการลบ order {{laundry.first_name}} หรือไม่?')">ลบ</a>    
                     </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
