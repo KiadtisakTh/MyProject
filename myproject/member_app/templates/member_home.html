@@ -1,0 +1,28 @@
+{% extends 'components/base.html' %}
+
+{% block title %} สมาชิกรายเดือน {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="flex-grow">
+    <div class="flex justify-center items-center mt-10 w-full">
+        <div class="bg-blue-200 w-[30rem] rounded-lg shadow-md p-6">
+          <div class="flex items-center mb-4">
+            
+            <div class="flex ">
+            <div class="flex-col items-center">
+              <h2 class="text-xl font-bold">สมัครรายเดือน</h2>
+              <p class="text-center font-semibold">สิทธิที่จะได้รับ</p>
+              <p>บริการส่งผ้า 1 กิโลเมตร</p>
+              <p>ส่งผ้าได้ทั้งหมดวันละไม่เกิน4ตัว ต่อ 1อาทิตย์</p>
+              <p>รับ-ส่งผ้าทุก วันอังคาร เเละ วันพฤหัสบดี</p>
+              <p>ที่อยู่: {{ user_profile.address }}</p>
+            </div>
+            </div>
+          </div>
+          <button class="px-3 py-2 rounded-md bg-blue-500 text-white">สมัครรายเดือน</button>
+          
+        </div>
+      </div>
+</div>
+{% endblock %}
