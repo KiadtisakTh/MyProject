@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from member_app.models import MemberModel
 from web_app.models import User_Profile
 from web_app.forms import UserprofileForm
 from django.core.exceptions import ObjectDoesNotExist
@@ -21,7 +22,8 @@ def contact(req):
 def user_profile(req):
     try:
         user_profile = User_Profile.objects.get(user=req.user)
-        return render(req, 'user_profile.html', {'user_profile': user_profile})
+        member = MemberModel.objects.all()
+        return render(req, 'user_profile.html', {'user_profile': user_profile , 'members':member})
     except ObjectDoesNotExist:
         return redirect('edit_profile')
 

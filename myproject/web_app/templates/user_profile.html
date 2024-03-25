@@ -20,6 +20,10 @@
           <p>อีเมล: {{ user.email }}</p>
           <p>เบอร์โทรศัพท์: {{ user_profile.phone_number }}</p>
           <p>ที่อยู่: {{ user_profile.address }}</p>
+
+          {% for member in members %}
+            <p>สถานะ:{{ member.get_status_member_display }}</p>
+          {% endfor %}
         </div>
       </div>
       <form method="post" enctype="multipart/form-data" action="{% url 'update_profile_image' %}">
