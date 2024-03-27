@@ -62,7 +62,7 @@ def table_list(req):
                 pass  # กรณีไม่พบคำสั่งซักผ้าที่ต้องการยกเลิก ไม่ต้องทำอะไร
         return redirect('table_list')
 
-    model_form = ModelForm.objects.filter(first_name=req.user.first_name)
+    model_form = ModelForm.objects.filter(email=req.user.email)
     model_form = model_form.exclude(status='4')
     return render(req, "table_list.html", {"model_form": model_form})
 

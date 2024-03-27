@@ -22,10 +22,11 @@ def contact(req):
 def user_profile(req):
     try:
         user_profile = User_Profile.objects.get(user=req.user)
-        member = MemberModel.objects.all()
-        return render(req, 'user_profile.html', {'user_profile': user_profile , 'members':member})
+        member = MemberModel.objects.filter(user=req.user)
+        return render(req, 'user_profile.html', {'user_profile': user_profile, 'members': member})
     except ObjectDoesNotExist:
         return redirect('edit_profile')
+
 
 def update_profile_image(request):
     if request.method == 'POST':
@@ -45,5 +46,5 @@ def edit_profile(request):
             return redirect('user_profile')  # Redirect to the user's profile page
     else:
         form = UserprofileForm(instance=user_profile)
-    return render(request, 'edit_profile.html', {'form': form})
+    return render(request, 'edit_profile.html', {'form': form })
         
