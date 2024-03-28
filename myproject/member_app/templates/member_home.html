@@ -5,37 +5,9 @@
 {% block content %}
 
 <div class="flex-grow">
-  {% for member in members %}
-  {% if member.status_member == '2' %}
-  <div class="flex justify-center items-center mt-10 w-full">
-    <div class="bg-blue-200 w-[24rem] rounded-lg shadow-md p-6">
-      <div class="flex items-center mb-4">
-        
-        <div class="">
-          <h2 class="text-center text-xl"><ion-icon class="text-6xl text-green-600" name="checkmark-circle"></ion-icon></h2>
-          <p class="font-semibold text-center ">คุณเป็นลูกค้ารายเดือนเเล้ว</p>
-          <hr class="h-px my-5 bg-gray-900 border-0">
-          <p class="font-semibold text-center ">ขอบคุณที่ใช้บริการ</p>
-      
-                    
-          <hr class="h-px my-5 bg-gray-900 border-0">
-          <p class="font-semibold">หมายเหตุ:<a class="font-normal"> หากอยู่นอกรัศมีให้นำผ้ามาส่งตามปกติ</a></p>
-             
-        </div>
-        
-      </div>
-      
-      <form action="{% url 'upgrade_membership' %}" method="post">
-        {% csrf_token %}
-        <button type="submit"  class="px-3 py-2 rounded-md bg-blue-500 text-white">สมัครรายเดือน</button>
-    </form>
-    
-    
-    
-    </div>
-  </div>
+  
 
-  {% else %}
+
     <div class="flex justify-center items-center mt-10 w-full">
         <div class="bg-blue-200 w-[24rem] rounded-lg shadow-md p-6">
           <div class="flex items-center mb-4">
@@ -57,16 +29,16 @@
             
           </div>
           
-          <form action="{% url 'upgrade_membership' %}" method="post">
+          <form action="{% url 'membership' %}" method="post">
             {% csrf_token %}
-            <button type="submit"  class="px-3 py-2 rounded-md bg-blue-500 text-white">สมัครรายเดือน</button>
+            <button type="submit"  class="w-full py-2 rounded-md bg-blue-500 text-white">สมัครรายเดือน</button>
         </form>
         
         
         
         </div>
       </div>
-      {% endif %}
-      {% endfor %}
+    
+      
 </div>
 {% endblock %}

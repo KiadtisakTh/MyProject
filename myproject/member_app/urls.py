@@ -4,8 +4,9 @@ from member_app import views
 
 urlpatterns = [
     path("member_home",views.member_home , name="member_home"),
-    path('upgrade-membership/', views.upgrade_membership, name='upgrade_membership'),
-    path('name' , views.name , name="name")
+    path('membership/', views.membership, name='membership'),
+    path('member_form' , views.member_form , name="member_form"),
+    path('member_sucess' , views.member_sucess , name="member_sucess"),
     
 
 ]

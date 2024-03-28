@@ -1,0 +1,44 @@
+{% extends 'components/base.html' %}
+
+{% block title %} สมาชิกรายเดือน {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="flex-grow">
+  
+  <div class="flex justify-center items-center mt-10 w-full">
+    <div class="bg-blue-300 w-[24rem] rounded-lg shadow-md p-6">
+      <div class="flex items-center mb-4">
+        
+        <div class="">
+         
+          <p class="font-semibold text-center">กรุณากรอกที่อยู่ของคุณ</p>
+          <hr class="h-px my-5 bg-gray-900 border-0">
+          <p>-บริการส่งผ้ารัศมี 1 กิโลเมตรจากร้าน</p>
+          <p>-ส่งผ้าได้ทั้งหมดวันละไม่เกิน 4 ตัว ต่อ 1 วัน</p>
+          <p>-รับ-ส่งผ้าทุก วันอังคาร เเละ วันพฤหัสบดี</p>
+                    
+          <hr class="h-px my-5 bg-gray-900 border-0">
+          <p class="font-semibold mb-2">หมายเหตุ:<a class="font-normal"> หากอยู่นอกรัศมีให้นำผ้ามาส่งตามปกติ</a></p>
+          <form method="post">
+            {% csrf_token %}  
+          <div class="mb-4">
+            <label for="address_member" class="block text-gray-600 mb-1">กรอกลิ้งที่อยู่ใกล้เคียง:</label>
+            <input type="text" name="address_member" placeholder="https://maps.app.goo.gl/HgoeQuRKaFsaMCqd8" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" step="any">
+          </div>
+        
+          
+    
+          <button type="submit" class="bg-blue-500 text-white w-full py-2 rounded-md hover:bg-blue-700">ตกลง</button>
+        </form>
+        </div>
+        
+      </div>
+      
+       
+      
+</div>
+
+  </div>
+</div>
+{% endblock %}

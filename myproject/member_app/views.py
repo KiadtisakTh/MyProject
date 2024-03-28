@@ -5,31 +5,47 @@ from django.views.decorators.csrf import csrf_exempt
 
 from member_app.models import MemberModel
 from form_service.models import ModelForm
+from member_app.form import MemberForm
 from web_app.models import User_Profile
 
 # Create your views here.
 def member_home(req):
-     members = MemberModel.objects.filter(user = req.user)
-     return render(req, 'member_home.html', {'members': members})
+    members = MemberModel.objects.filter(user=req.user)
+    for member in members:
+        if member.status_member == 2:
+            return redirect('member_sucess')  # เปลี่ยน 'member_success' เป็นชื่อ URL ของหน้าที่ต้องการ redirect ไป
+    # หากไม่มีสมาชิกที่มีสถานะเป็น 2 ให้ดึงข้อมูลใหม่จากฐานข้อมูล
+    members = MemberModel.objects.filter(user=req.user)
+    return render(req, 'member_home.html', {'members': members})
+
+
+def member_sucess(req):
+     return render(req, 'member_sucess.html')
 
 
 
-def upgrade_membership(request):
+def membership(request):
     try:
         member = MemberModel.objects.get(user=request.user)
     except MemberModel.DoesNotExist:
-        # สร้างอินสแตนซ์ MemberModel ใหม่สำหรับผู้ใช้ปัจจุบัน
         member = MemberModel.objects.create(user=request.user, status_member="2")
-    
+
     if request.method == "POST":
-        # อัปเดตสถานะเป็น "สมาชิกรายเดือน"
         member.status_member = "2"
         member.save()
-        return redirect('user_profile')  # เปลี่ยนเส้นทางไปยังหน้าสำเร็จ
+        return redirect('member_form') 
         
     else:
-        # จัดการคำขอ GET ตามที่จำเป็น
+        
         return render(request, 'member_home.html', {'member': member})
     
-def name(req):
-    return render(req ,'name.html')
+def member_form(req):
+    if req.method == 'POST':
+        form = MemberForm(req.POST)
+        if form.is_valid():
+            form.save()  # บันทึกข้อมูลลงในฐานข้อมูล
+            return redirect('member_sucess')  # แล้ว redirect ไปยังหน้าที่ต้องการหลังจากการส่งแบบฟอร์มสำเร็จ
+    else:
+        form = MemberForm()
+    
+    return render(req, 'member_form.html', {'form': form})

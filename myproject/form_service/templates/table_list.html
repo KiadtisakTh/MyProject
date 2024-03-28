@@ -49,9 +49,7 @@
                 <th scope="col" class="px-6 py-3">
                     
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    
-                </th>
+               
             </tr>
         </thead>
         <tbody>
@@ -76,7 +74,7 @@
                     <label for="">{{laundry.get_status_display}}</label>
                  </td>
                  <td class="px-6 py-4">
-                    <a class="hover:underline" href="{% url 'detail' laundry.id %}">รายละเอียด</a>
+                    <a class="hover:underline text-black" href="{% url 'detail' laundry.id %}">รายละเอียด</a>
                  </td>
               
 
@@ -84,9 +82,9 @@
                 <form method="post">
                     {% csrf_token %}
                 {% if laundry.status == '3' %}
-                <td class="px-4 py-4  text-white ">
-                    <a href="/edit_service/{{user.id}} " class="rounded bg-green-600 hover:bg-green-500 p-2 px-3">แก้ไข</a>
-                </td>
+                <!-- <td class="px-4 py-4  text-white ">
+                    <a href="/edit_service/{{laundry.id}} " class="rounded bg-green-600 hover:bg-green-500 p-2 px-3">แก้ไข</a>
+                </td> -->
                 <td class="px-4 py-4 text-white ">
                     <button type="submit" name="cancel_button" value="{{ laundry.id }}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-3">ยกเลิก</button>
                 </td>
