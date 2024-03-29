@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
     
@@ -23,5 +24,7 @@ class ModelForm(models.Model):
     number_baskets = models.CharField(max_length = 100 , null = True)
     note = models.CharField(max_length = 100)
     status = models.CharField(max_length=255,choices=ORDER_CHOICE,default=3)
+    
+    
     
 

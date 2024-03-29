@@ -22,10 +22,11 @@ def contact(req):
 def user_profile(req):
     try:
         user_profile = User_Profile.objects.get(user=req.user)
-        member = MemberModel.objects.filter(user=req.user)
-        return render(req, 'user_profile.html', {'user_profile': user_profile, 'members': member})
+        member = MemberModel.objects.get(user=req.user)  # ใช้ get() แทน filter()
+        return render(req, 'user_profile.html', {'user_profile': user_profile, 'member': member})  # แก้ชื่อตัวแปรเป็น 'member' เนื่องจากมันควรจะเป็นแค่หนึ่งรายการ
     except ObjectDoesNotExist:
         return redirect('edit_profile')
+
 
 
 def update_profile_image(request):

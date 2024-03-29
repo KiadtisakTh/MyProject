@@ -4,15 +4,21 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import user_passes_test
 
 from admin_app.form import UserService
+from member_app.models import MemberModel
 
 
 
 # Create your views here.
 @user_passes_test(lambda u: u.is_superuser)
 @login_required
-def adnin_home(req):
+def admin_home(req):
     list_user = ModelForm.objects.all()
     return render(req, "admin_home.html", {"list_user": list_user})
+
+def admin_member(req):
+    list_user = ModelForm.objects.all()
+    member = MemberModel.objects.all()
+    return render(req, "admin_member.html", {"list_user": list_user , 'members':member})
 
 
 def admin_order(req):

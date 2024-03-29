@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 from member_app.models import MemberModel
 from form_service.models import ModelForm
@@ -13,8 +14,7 @@ def member_home(req):
     members = MemberModel.objects.filter(user=req.user)
     for member in members:
         if member.status_member == 2:
-            return redirect('member_sucess')  # เปลี่ยน 'member_success' เป็นชื่อ URL ของหน้าที่ต้องการ redirect ไป
-    # หากไม่มีสมาชิกที่มีสถานะเป็น 2 ให้ดึงข้อมูลใหม่จากฐานข้อมูล
+            return redirect('member_sucess')  
     members = MemberModel.objects.filter(user=req.user)
     return render(req, 'member_home.html', {'members': members})
 
@@ -39,13 +39,26 @@ def membership(request):
         
         return render(request, 'member_home.html', {'member': member})
     
-def member_form(req):
-    if req.method == 'POST':
-        form = MemberForm(req.POST)
+def member_form(request):
+    if request.method == 'POST':
+        form = MemberForm(request.POST)
         if form.is_valid():
-            form.save()  # บันทึกข้อมูลลงในฐานข้อมูล
-            return redirect('member_sucess')  # แล้ว redirect ไปยังหน้าที่ต้องการหลังจากการส่งแบบฟอร์มสำเร็จ
+            # ดึงข้อมูลผู้ใช้ที่ลงทะเบียนอยู่
+            user = request.user
+            # สร้าง MemberModel object โดยใช้ข้อมูลจากแบบฟอร์ม
+            member = form.save(commit=False)  # ไม่บันทึกลงในฐานข้อมูลก่อน
+            member.user = user  # เชื่อมโยงกับผู้ใช้
+            member.save()  # บันทึกลงในฐานข้อมูล
+            return redirect('member_success')  # แล้ว redirect ไปยังหน้าที่ต้องการหลังจากการส่งแบบฟอร์มสำเร็จ
     else:
         form = MemberForm()
     
-    return render(req, 'member_form.html', {'form': form})
+    return render(request, 'member_form.html', {'form': form})
+
+
+def cancel_monthly_subscription(request):
+    if request.method == 'POST':
+        member = MemberModel.objects.get(user=request.user)
+        member.status_member = 1
+        member.save()
+        return redirect('user_profile')  

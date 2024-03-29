@@ -11,6 +11,7 @@ ORDER_CHOICE = (
 
 class MemberModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    modelform = models.ForeignKey(ModelForm, on_delete=models.CASCADE, null=True)
     status_member = models.IntegerField(choices=ORDER_CHOICE, default=1)
     address_member = models.TextField(null=True, blank=True)
   

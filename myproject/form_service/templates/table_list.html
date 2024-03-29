@@ -20,31 +20,26 @@
         <thead class="text-sm text-yellow-100 uppercase bg-[#006abc] shadow-xl">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    ชื่อ
+                    ID
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    บริการ
+                    วันที่ส่ง
                 </th>
     
                 <th scope="col" class="px-6 py-3">
-                    รูปเเบบจัดเก็บผ้า
+                    วันที่รับผ้า
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    จำนวนตะกร้า
-                </th>
-                <!-- <th scope="col" class="px-6 py-3">
-                    หมายเหตุ
-                </th> -->
-                {% if user.is_staff %}
-                <th scope="col" class="px-[27px] py-3">
-                    เเก้ไข
-                </th>
-                {% endif %}
+                
+               
+               
                 <th scope="col" class="px-6 py-3">
                     สถานะ
                 </th>
                 <th scope="col" class="px-6 py-3">
                     รายละเอียด
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    ราคา
                 </th>
                 <th scope="col" class="px-6 py-3">
                     
@@ -59,15 +54,13 @@
                     {{laundry.id}}
                  </td>
 
-                <td class="px-6 py-4">
-                   คุณ{{laundry.first_name}}
-                </td>
+               
                  <td id="dropdown" class="px-6 py-4">
-                    {{laundry.Laundry}}
+                    {{laundry.date_start}}
                  </td>
 
                  <td  class="px-6 py-4">
-                    {{laundry.clothes}}
+                    {{laundry.date_end}}
                  </td>
                  <td  class="px-6 py-4">
 
@@ -76,8 +69,9 @@
                  <td class="px-6 py-4">
                     <a class="hover:underline text-black" href="{% url 'detail' laundry.id %}">รายละเอียด</a>
                  </td>
-              
-
+                 <td class="px-6 py-4">
+                   
+                 </td>
                 
                 <form method="post">
                     {% csrf_token %}

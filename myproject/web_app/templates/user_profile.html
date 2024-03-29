@@ -21,13 +21,14 @@
           <p>เบอร์โทรศัพท์: {{ user_profile.phone_number }}</p>
           <p>ที่อยู่: {{ user_profile.address }}</p>
 
-          {% for member in members %}
-            {% if member.status_member == '2' %}
-              <p>สถานะ: {{ member.get_status_member_display }}</p>
-            {% else %}
-              <p>สถานะ: สมาชิกรายวัน</p>
-            {% endif %}
-          {% endfor %}
+         
+          {% if member.status_member == 2 %}
+          <p>สถานะ: สมาชิกรายเดือน</p>
+          {% else %}
+          <p>สถานะ: สมาชิกรายวัน</p>
+          {% endif %}
+      
+        
 
         </div>
       </div>
