@@ -37,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- {% for user in list_user %}
+                {% for user in list_user %}
                 <tr class="bg-sky-100 border-b text-gray-700 font-semibold border-gray-600">
                     <td class="px-6 py-4">
                         {{user.id}}
@@ -45,9 +45,7 @@
                     <td class="px-6 py-4">
                        คุณ{{user.address_member}} {{user.last_name}}
                     </td>
-                    <td class="px-6 py-4">
-                        คุณ{{user.first_name}} {{user.last_name}}
-                     </td>
+                    
                      <td id="dropdown" class="px-6 py-4">
                         {{user.date_start}}
                      </td>
@@ -65,7 +63,11 @@
                     <td id="dropdown" class="px-6 py-4">
                             <a href="{% url 'admin_detail' user.id %}">รายละเอียด</a>
                     </td>                   
-                    
+                    {% for i in members %}
+                <td class="px-4 py-4 text-black">
+                   {{ i.address_member}}
+                </td>
+                {% endfor %}
 
                      <td>
                      </td>
@@ -100,21 +102,13 @@
                     </td>
                     {% endif %}
                 </tr>
-                {% endfor %} -->
-                {% for member in members %}
-    <td class="px-4 py-4 text-black">
-        {{ member.address_member }}
-        <h1>adkl;qwkt;qw</h1>
-    </td>
-    <td class="px-4 py-4 text-black">
-        {{ member.user.first_name }}
-        <h1>adkl;qwkt;qw</h1>
-    </td>
-    <td class="px-4 py-4 text-red-600 text-2xl">
-        {{ member.note }}
-        
-    </td>
-{% endfor %}
+                {% endfor %}
+                {% for i in members %}
+                <td class="px-4 py-4 text-black">
+                   {{ i.address_member}}
+                </td>
+                {% endfor %}
+
 
             </tbody>
         </table>

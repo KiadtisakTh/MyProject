@@ -19,8 +19,8 @@ def member_home(req):
     return render(req, 'member_home.html', {'members': members})
 
 
-def member_sucess(req):
-     return render(req, 'member_sucess.html')
+def member_success(req):
+     return render(req, 'member_success.html')
 
 
 
@@ -39,21 +39,25 @@ def membership(request):
         
         return render(request, 'member_home.html', {'member': member})
     
+
 def member_form(request):
     if request.method == 'POST':
         form = MemberForm(request.POST)
         if form.is_valid():
             # ดึงข้อมูลผู้ใช้ที่ลงทะเบียนอยู่
             user = request.user
-            # สร้าง MemberModel object โดยใช้ข้อมูลจากแบบฟอร์ม
-            member = form.save(commit=False)  # ไม่บันทึกลงในฐานข้อมูลก่อน
-            member.user = user  # เชื่อมโยงกับผู้ใช้
-            member.save()  # บันทึกลงในฐานข้อมูล
+            # ตรวจสอบว่ามี MemberModel object สำหรับผู้ใช้นี้อยู่แล้วหรือไม่
+            member, created = MemberModel.objects.get_or_create(user=user)
+            # อัปเดตฟิลด์ address_member ด้วยข้อมูลจากแบบฟอร์ม
+            member.address_member = form.cleaned_data['address_member']
+            member.save()  # บันทึกการเปลี่ยนแปลงลงในฐานข้อมูล
+            
             return redirect('member_success')  # แล้ว redirect ไปยังหน้าที่ต้องการหลังจากการส่งแบบฟอร์มสำเร็จ
     else:
         form = MemberForm()
     
     return render(request, 'member_form.html', {'form': form})
+
 
 
 def cancel_monthly_subscription(request):

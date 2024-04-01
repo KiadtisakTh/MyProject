@@ -16,9 +16,12 @@ def admin_home(req):
     return render(req, "admin_home.html", {"list_user": list_user})
 
 def admin_member(req):
-    list_user = ModelForm.objects.all()
-    member = MemberModel.objects.all()
-    return render(req, "admin_member.html", {"list_user": list_user , 'members':member})
+    # ดึงข้อมูลจาก ModelForm ที่เชื่อมกับ MemberModel และมี status_member เท่ากับ 2
+    list_user = ModelForm.objects.filter(membermodel__status_member=2)
+    
+    # ส่งข้อมูลไปยังเทมเพลต
+    return render(req, "admin_member.html", {"list_user": list_user})
+
 
 
 def admin_order(req):
@@ -56,5 +59,5 @@ def user_service(req,id):
 def admin_delete(req ,id):
     form = ModelForm.objects.get(pk = id)
     form.delete()
-    return redirect(adnin_home)
+    return redirect(admin_home)
         

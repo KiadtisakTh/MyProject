@@ -14,4 +14,7 @@ class MemberModel(models.Model):
     modelform = models.ForeignKey(ModelForm, on_delete=models.CASCADE, null=True)
     status_member = models.IntegerField(choices=ORDER_CHOICE, default=1)
     address_member = models.TextField(null=True, blank=True)
+
+    def __str__(self) -> str:
+        return str(self.user)
   
