@@ -45,7 +45,6 @@ def user_register(req):
 
 def user_logout(req):
         logout(req)
-        # Redirect to a success page.
         return redirect("/")
 
 

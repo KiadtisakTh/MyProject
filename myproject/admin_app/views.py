@@ -12,21 +12,15 @@ from member_app.models import MemberModel
 @user_passes_test(lambda u: u.is_superuser)
 @login_required
 def admin_home(req):
-    list_user = ModelForm.objects.all()
+    list_user = ModelForm.objects.all().order_by('date_start')
     return render(req, "admin_home.html", {"list_user": list_user})
 
 def admin_member(req):
-    # ดึงข้อมูลจาก ModelForm ที่เชื่อมกับ MemberModel และมี status_member เท่ากับ 2
     list_user = ModelForm.objects.filter(membermodel__status_member=2)
-    
-    # ส่งข้อมูลไปยังเทมเพลต
     return render(req, "admin_member.html", {"list_user": list_user})
 
 
 
-def admin_order(req):
-    order = ModelForm.objects.all()
-    return render(req,'admin_order.html',{'list_order':order})
 
 def admin_detail(req,id):
     order = ModelForm.objects.get(pk=id)

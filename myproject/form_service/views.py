@@ -25,9 +25,9 @@ def service_user(req):
             number_baskets=req.POST.get('number_baskets'),
             note=req.POST.get('note'),
         )
-        # Save the instance to the database
+        
         user_model.save()
-        # Redirect to a success page or do something else
+        
         return redirect('table_list')
     else:
         form = UserForm()
@@ -54,13 +54,13 @@ def edit_service(req,id):
 def table_list(req):
     if req.method == 'POST':
         cancel_button_value = req.POST.get('cancel_button')
-        if cancel_button_value:  # ตรวจสอบว่ามีค่า cancel_button หรือไม่
+        if cancel_button_value:  
             try:
                 order_to_cancel = ModelForm.objects.get(id=cancel_button_value)
                 order_to_cancel.status = '4' 
                 order_to_cancel.save()
             except ModelForm.DoesNotExist:
-                pass  # กรณีไม่พบคำสั่งซักผ้าที่ต้องการยกเลิก ไม่ต้องทำอะไร
+                pass  
         return redirect('table_list')
 
     model_form = ModelForm.objects.filter(email=req.user.email)

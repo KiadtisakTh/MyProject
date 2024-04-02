@@ -22,8 +22,8 @@ def contact(req):
 def user_profile(req):
     try:
         user_profile = User_Profile.objects.get(user=req.user)
-        member = MemberModel.objects.get(user=req.user)  # ใช้ get() แทน filter()
-        return render(req, 'user_profile.html', {'user_profile': user_profile, 'member': member})  # แก้ชื่อตัวแปรเป็น 'member' เนื่องจากมันควรจะเป็นแค่หนึ่งรายการ
+        member = MemberModel.objects.get(user=req.user)  
+        return render(req, 'user_profile.html', {'user_profile': user_profile, 'member': member})  
     except ObjectDoesNotExist:
         return redirect('edit_profile')
 
@@ -36,7 +36,7 @@ def update_profile_image(request):
             user_profile, created = User_Profile.objects.get_or_create(user=request.user)
             user_profile.profile_image = profile_image
             user_profile.save()
-    return redirect('user_profile')  # Redirect to the user's profile page
+    return redirect('user_profile')  
 
 def edit_profile(request):
     user_profile, created = User_Profile.objects.get_or_create(user=request.user)
@@ -44,7 +44,7 @@ def edit_profile(request):
         form = UserprofileForm(request.POST, instance=user_profile)
         if form.is_valid():
             form.save()
-            return redirect('user_profile')  # Redirect to the user's profile page
+            return redirect('user_profile')  
     else:
         form = UserprofileForm(instance=user_profile)
     return render(request, 'edit_profile.html', {'form': form })

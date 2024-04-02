@@ -44,15 +44,14 @@ def member_form(request):
     if request.method == 'POST':
         form = MemberForm(request.POST)
         if form.is_valid():
-            # ดึงข้อมูลผู้ใช้ที่ลงทะเบียนอยู่
+          
             user = request.user
-            # ตรวจสอบว่ามี MemberModel object สำหรับผู้ใช้นี้อยู่แล้วหรือไม่
             member, created = MemberModel.objects.get_or_create(user=user)
-            # อัปเดตฟิลด์ address_member ด้วยข้อมูลจากแบบฟอร์ม
+           
             member.address_member = form.cleaned_data['address_member']
-            member.save()  # บันทึกการเปลี่ยนแปลงลงในฐานข้อมูล
+            member.save()  
             
-            return redirect('member_success')  # แล้ว redirect ไปยังหน้าที่ต้องการหลังจากการส่งแบบฟอร์มสำเร็จ
+            return redirect('member_success')  
     else:
         form = MemberForm()
     
