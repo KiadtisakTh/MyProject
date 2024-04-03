@@ -14,7 +14,7 @@ def member_home(req):
     members = MemberModel.objects.filter(user=req.user)
     for member in members:
         if member.status_member == 2:
-            return redirect('member_sucess')  
+            return redirect('member_success')  
     members = MemberModel.objects.filter(user=req.user)
     return render(req, 'member_home.html', {'members': members})
 
