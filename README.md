@@ -1,5 +1,4 @@
-# MyProject
-S heart laundry service
+# S heart laundry service
 MyProject 64<br>
 
 # Freze version env<br>
