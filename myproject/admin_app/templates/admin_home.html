@@ -93,7 +93,7 @@
                     </td>
 
                     <td class="px-4 py-4 text-white">
-                        <a href="{% url 'admin_delete' user.id %}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-5" onclick="return confirm('คุณต้องการลบ order {{laundry.first_name}} หรือไม่?')">ลบ</a>    
+                        <a href="{% url 'admin_delete' user.id %}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-5" onclick="return confirm('คุณต้องการลบ ID {{user.id}} ของคุณ {{user.first_name}} หรือไม่?')">ลบ</a>    
                     </td>
                     {% endif %}
                 </tr>

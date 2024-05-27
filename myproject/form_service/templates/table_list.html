@@ -98,7 +98,7 @@
                     {% csrf_token %}
                 {% elif laundry.status == '3' %}
                 <td class="px-4 py-4 text-white ">
-                    <button type="submit" name="cancel_button" value="{{ laundry.id }}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-3">ยกเลิก</button>
+                    <button type="submit" name="cancel_button" value="{{ laundry.id }}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-3" onclick="return confirm('คุณต้องการยกเลิก ID {{laundry.id}} หรือไม่?')">ยกเลิก</button>
                 </td>
                 </form>
                 
