@@ -16,3 +16,12 @@ pip install django-crispy-forms <br>
 
 # install Crispy tailwind <br>
 pip install crispy-tailwind <br>
+
+# Realtime Django Channels and Daphne <br>
+pip install daphne <br>
+pip install channels <br>
+
+
+# How to open server <br>
+daphne -b 0.0.0.0 -p 8000 myproject.asgi:application <br>
+python manage.py runserver  <br>
