@@ -1,11 +1,11 @@
+import logging
 from django.shortcuts import render , redirect
 from form_service.models import ModelForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import user_passes_test
-
 from admin_app.form import UserService
-from member_app.models import MemberModel
-
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 
 # Create your views here.
@@ -26,11 +26,32 @@ def admin_detail(req,id):
     order = ModelForm.objects.get(pk=id)
     return render(req,'admin_detail.html',{'order':order})
 
-def update_status(req,id):
+logger = logging.getLogger(__name__)
+
+def update_status(req, id):
     order = ModelForm.objects.get(pk=id)
     if req.method == "POST":
         order.status = req.POST['status']
         order.save()
+        logger.info(f"Order status updated to {order.status} for order ID {id}")
+
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            "admin_orders",
+            {
+                "type": "order_update",
+                "message": f"Order {id} status has been updated."
+            }
+        )
+
+        async_to_sync(channel_layer.group_send)(
+            "user_orders",
+            {
+                "type": "order_update",
+                "message": f"Order {id} status has been updated."
+            }
+        )
+
         return redirect("/admin_home")
     
 @login_required

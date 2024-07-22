@@ -5,7 +5,6 @@
 {% block content %}
 
 <div class="flex-grow">
-
     <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
             <thead class="text-xs text-white uppercase bg-blue-700">
@@ -54,21 +53,19 @@
                      </td>
                                         
                     {% if user.status == '4' %}
-                    <td class="px-6 py-4">
-                        {{user.get_status_display}}
-                     </td>
-
-                         
-                    <td id="dropdown" class="px-6 py-4">
+                        <td class="px-6 py-4">
+                            {{user.get_status_display}}
+                        </td> 
+                        <td id="dropdown" class="px-6 py-4">
                             <a href="{% url 'admin_detail' user.id %}">รายละเอียด</a>
-                    </td>                   
-                    
+                        </td>                   
+                        <td>
+                        </td>
 
-                     <td>
-                     </td>
-                    <td class="px-4 py-4 text-white">
-                        <a href="/delete/{{user.id}}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-5" onclick="return confirm('คุณต้องการลบ order {{laundry.first_name}} หรือไม่?')">ลบ</a>    
-                    </td>
+                        <td class="px-4 py-4 text-white">
+                            <a href="/admin_delete/{{user.id}}" class="rounded bg-red-700 hover:bg-red-600 p-2 px-5" onclick="return confirm('คุณต้องการลบ  {{user.first_name}} หรือไม่?')">ลบ</a>    
+                        </td>
+
                     {% else %}
                      <td id="dropdown" class="px-1 py-4">
                         <form action="{% url 'status_update' user.id %}" method="POST">
@@ -76,7 +73,7 @@
                             <select name="status" id="countries" class="w-full p-1 bg-sky-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="max-width: 150px;">
                                 <option>{{user.get_status_display}}</option>
                                 <option value="1" >เสร็จเเล้ว</option>
-                                <option value="2">ยังไม่เสร็จ</option>
+                                <option value="2">กำลังดำเนินการ</option>
                                 <option value="3" >รอการส่งซัก</option>
                             </select>
                             
@@ -105,5 +102,19 @@
     
 </div>
 
+<script>
+    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+    var adminOrdersSocket = new WebSocket(ws_scheme + '://' + window.location.host + '/ws/admin/orders/');
+
+    adminOrdersSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        alert(data.message);
+        location.reload();
+    };
+
+    adminOrdersSocket.onclose = function(e) {
+        console.error('WebSocket closed unexpectedly');
+    };
+</script>
 
 {% endblock %}

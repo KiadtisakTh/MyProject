@@ -3,7 +3,7 @@ import random
 
 ORDER_CHOICE = (
     ("1", "เสร็จเเล้ว"),
-    ("2", "ยังไม่เสร็จ"),
+    ("2", "กำลังดำเนินการ"),
     ("3", "รอการส่งซัก"),
     ("4", "ยกเลิกเเล้ว"),
 )
@@ -22,15 +22,6 @@ class ModelForm(models.Model):
     note = models.CharField(max_length=100)
     admin_price = models.CharField(max_length=100 ,null=True)
     status = models.CharField(max_length=255, choices=ORDER_CHOICE, default="3")
-
-    @staticmethod
-    def generate_unique_id():
-        while True:
-            unique_id = random.randint(100, 999)
-            if not ModelForm.objects.filter(id=unique_id).exists():
-                return unique_id
-
-    id = models.PositiveIntegerField(primary_key=True, default=generate_unique_id, editable=False)
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.id}"

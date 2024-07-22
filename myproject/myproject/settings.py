@@ -45,8 +45,16 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_tailwind",
     "admin_app",
-    "member_app",
+    "channels",
+    "corsheaders",
 ]
+ASGI_APPLICATION = 'myproject.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
@@ -60,8 +68,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
-
+CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = "myproject.urls"
 
 TEMPLATES = [
@@ -136,7 +146,6 @@ STATIC_ROOT =  'static/'
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_ROOT = BASE_DIR / "web_app/media"
 
 MEDIA_URL = 'web_app/media/'
 # Default primary key field type
@@ -147,3 +156,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # กำหนด URL ที่เราต้องการให้ผู้ใช้เข้าสู่ระบบ
 LOGIN_URL = '/login/'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}

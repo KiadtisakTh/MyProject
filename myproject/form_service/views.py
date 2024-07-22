@@ -1,25 +1,37 @@
+import datetime
+import logging
 from django.shortcuts import render , redirect
 from form_service.models import ModelForm
 from form_service.form import UserForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.db.models import Count
 from web_app.models import User_Profile
-
+from datetime import datetime, timedelta
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 # Create your views here.
-@login_required
 def service_user(req):
     if req.method == "POST":
+        date_start = req.POST.get('date_start')
+        date_end = (datetime.strptime(date_start, '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
+        
+        # ตรวจสอบว่ามีฟอร์มครบ 20 สำหรับวันที่เลือกหรือไม่
+        count = ModelForm.objects.filter(date_start=date_start).count()
+        if count >= 15:
+            messages.error(req, "ไม่สามารถเลือกวันนี้ได้แล้ว เนื่องจากมีผู้ใช้บริการครบ 20 คนแล้ว")
+            return redirect('service')
+        
         user_model = ModelForm.objects.create(
-            first_name = req.POST.get('first_name'),
+            first_name=req.POST.get('first_name'),
             last_name=req.POST.get('last_name'),
             email=req.POST.get('email'),
             phone_number=req.POST.get('phone_number'),
             Laundry=req.POST.get('Laundry'),
-            date_start=req.POST.get('date_start'),
-            date_end=req.POST.get('date_end'),
+            date_start=date_start,
+            date_end=date_end,
             clothes=req.POST.get('clothes'),
             number_clothes=req.POST.get('number_clothes'),
             number_baskets=req.POST.get('number_baskets'),
@@ -27,11 +39,12 @@ def service_user(req):
         )
         
         user_model.save()
-        
         return redirect('table_list')
     else:
         form = UserForm()
-    return render(req,"service.html" ,{"form":form})
+        # ดึงวันที่ที่มีการส่งฟอร์มครบ 20 ฟอร์ม
+        full_dates = ModelForm.objects.values('date_start').annotate(count=Count('id')).filter(count__gte=20).values_list('date_start', flat=True)
+    return render(req, "service.html", {"form": form, "full_dates": list(full_dates)})
 
 @login_required
 def edit_service(req,id):
@@ -49,18 +62,37 @@ def edit_service(req,id):
     return render(req,"edit_service.html",{"form":form , "model_form":user})
 
 
-
+logger = logging.getLogger(__name__)
 @login_required
 def table_list(req):
     if req.method == 'POST':
         cancel_button_value = req.POST.get('cancel_button')
-        if cancel_button_value:  
+        if cancel_button_value:
             try:
                 order_to_cancel = ModelForm.objects.get(id=cancel_button_value)
-                order_to_cancel.status = '4' 
+                order_to_cancel.status = '4'
                 order_to_cancel.save()
+                logger.info(f"Order {cancel_button_value} status updated to 4")
+
+                channel_layer = get_channel_layer()
+                async_to_sync(channel_layer.group_send)(
+                    "admin_orders",
+                    {
+                        "type": "order_update",
+                        "message": f"Order {cancel_button_value} status has been updated."
+                    }
+                )
+
+                async_to_sync(channel_layer.group_send)(
+                    "user_orders",
+                    {
+                        "type": "order_update",
+                        "message": f"Order {cancel_button_value} status has been updated."
+                    }
+                )
             except ModelForm.DoesNotExist:
-                pass  
+                logger.error(f"Order {cancel_button_value} does not exist")
+                pass
         return redirect('table_list')
 
     model_form = ModelForm.objects.filter(email=req.user.email)
