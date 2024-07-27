@@ -9,4 +9,6 @@ urlpatterns = [
     path("admin_home/update/<int:id>",views.update_status,name="status_update"),
     path("admin_delete/<int:id>",views.admin_delete ,name='admin_delete'),
     path("user_service/<int:id>",views.user_service ,name="user_service"),
+    path('dashboard/', dashboard_view, name='dashboard'),
+    path('reset-date-filter/', reset_date_filter, name='reset_date_filter'),
 ]

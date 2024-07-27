@@ -1,12 +1,18 @@
 import logging
 from django.shortcuts import render , redirect
-from form_service.models import ModelForm
+from form_service.models import ORDER_CHOICE, ModelForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import user_passes_test
 from admin_app.form import UserService
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
-
+from form_service.models import ModelForm
+from django.db.models import Count , Sum
+from django.db.models.functions import TruncDay, TruncMonth
+from collections import OrderedDict
+import calendar
+from django import forms
+import json
 
 # Create your views here.
 @user_passes_test(lambda u: u.is_superuser)
@@ -76,3 +82,58 @@ def admin_delete(req ,id):
     form.delete()
     return redirect(admin_home)
         
+class DateFilterForm(forms.Form):
+    start_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+def dashboard_view(request):
+    form = DateFilterForm(request.GET or None)
+    if form.is_valid():
+        start_date = form.cleaned_data['start_date']
+        orders = ModelForm.objects.filter(date_start__gte=start_date)
+        daily_orders = ModelForm.objects.filter(date_start__gte=start_date).annotate(day=TruncDay('date_start')).values('day').annotate(count=Count('id')).order_by('day')
+    else:
+        orders = ModelForm.objects.all()
+        daily_orders = ModelForm.objects.annotate(day=TruncDay('date_start')).values('day').annotate(count=Count('id')).order_by('day')
+
+    # จำนวนคำสั่งซักทั้งหมด
+    total_orders = orders.count()
+
+    # จำนวนเสื้อผ้าทั้งหมด
+    total_clothes = orders.aggregate(total_clothes=Sum('number_clothes'))['total_clothes'] or 0
+
+    # จำนวนตะกร้าทั้งหมด
+    total_baskets = orders.aggregate(total_baskets=Sum('number_baskets'))['total_baskets'] or 0
+
+    # จำนวนลูกค้าทั้งหมด
+    total_customers = orders.values('email').distinct().count()
+
+    # จำนวนคำสั่งซักแต่ละสถานะ
+    status_data = orders.values('status').annotate(count=Count('status'))
+    status_labels = [choice[1] for choice in ORDER_CHOICE]
+    status_counts = [status['count'] for status in status_data]
+
+    # จำนวนการส่งซักในแต่ละเดือน
+    monthly_orders = orders.annotate(month=TruncMonth('date_start')).values('month').annotate(count=Count('id')).order_by('month')
+    months = [calendar.month_name[i] for i in range(1, 13)]
+    monthly_counts = OrderedDict((month, 0) for month in months)
+    for order in monthly_orders:
+        month_name = order['month'].strftime('%B')
+        monthly_counts[month_name] = order['count']
+
+    context = {
+        'form': form,
+        'total_orders': total_orders,
+        'total_clothes': total_clothes,
+        'total_baskets': total_baskets,
+        'total_customers': total_customers,
+        'status_labels': json.dumps(status_labels),
+        'status_counts': json.dumps(status_counts),
+        'monthly_labels': json.dumps(list(monthly_counts.keys())),
+        'monthly_data': json.dumps(list(monthly_counts.values())),
+        'daily_orders': daily_orders,
+    }
+
+    return render(request, 'dashboard.html', context)
+
+def reset_date_filter(request):
+    return redirect('dashboard')
