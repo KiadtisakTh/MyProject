@@ -51,8 +51,8 @@ INSTALLED_APPS = [
 ASGI_APPLICATION = 'myproject.asgi.application'
 
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }
 
@@ -71,6 +71,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    # โดเมนอื่น ๆ ที่ได้รับอนุญาต
+]
+
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = "myproject.urls"
 

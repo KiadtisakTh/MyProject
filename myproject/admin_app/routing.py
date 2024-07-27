@@ -1,6 +1,6 @@
-from django.urls import re_path
+from django.urls import path
 from . import consumers
 
 websocket_urlpatterns = [
-    re_path(r'ws/admin/orders/$', consumers.AdminConsumer.as_asgi()),
+    path('ws/admin/orders/', consumers.OrderConsumer.as_asgi()),
 ]
