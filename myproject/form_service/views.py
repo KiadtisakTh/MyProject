@@ -21,17 +21,17 @@ def service_user(req):
         # ตรวจสอบว่ามีฟอร์มครบ 10 สำหรับวันที่เลือกหรือไม่
         count = ModelForm.objects.filter(date_start=date_start).count()
         if count >= 10:
-            messages.error(req, "ไม่สามารถเลือกวันนี้ได้แล้ว เนื่องจากมีผู้ใช้บริการครบ 15 คนแล้ว")
+            messages.error(req, "ไม่สามารถเลือกวันนี้ได้แล้ว เนื่องจากมีผู้ใช้บริการครบ 10 คนแล้ว")
             return redirect('service')
         
-        # ตรวจสอบจำนวนเสื้อผ้าไม่เกิน 150 ตัวต่อวัน
+        # ตรวจสอบจำนวนเสื้อผ้าไม่เกิน 100 ตัวต่อวัน
         total_clothes = ModelForm.objects.filter(date_start=date_start).aggregate(total_clothes=Sum('number_clothes'))['total_clothes'] or 0
         number_clothes = int(req.POST.get('number_clothes', 0))
         if total_clothes + number_clothes > 100:
             messages.error(req, "ไม่สามารถเลือกวันนี้ได้แล้ว เนื่องจากจำนวนเสื้อผ้าเกิน 100 ตัวแล้ว")
             return redirect('service')
         
-        # ตรวจสอบจำนวนตะกร้าไม่เกิน 9 ตะกร้าต่อวัน
+        # ตรวจสอบจำนวนตะกร้าไม่เกิน 7 ตะกร้าต่อวัน
         total_baskets = ModelForm.objects.filter(date_start=date_start).aggregate(total_baskets=Sum('number_baskets'))['total_baskets'] or 0
         number_baskets = int(req.POST.get('number_baskets', 0))
         if total_baskets + number_baskets > 7:
@@ -90,26 +90,7 @@ def table_list(req):
                 order_to_cancel = ModelForm.objects.get(id=cancel_button_value)
                 order_to_cancel.status = '4'
                 order_to_cancel.save()
-                logger.info(f"Order {cancel_button_value} status updated to 4")
-
-                channel_layer = get_channel_layer()
-                async_to_sync(channel_layer.group_send)(
-                    "admin_orders",
-                    {
-                        "type": "order_update",
-                        "message": f"Order {cancel_button_value} status has been updated."
-                    }
-                )
-
-                async_to_sync(channel_layer.group_send)(
-                    "user_orders",
-                    {
-                        "type": "order_update",
-                        "message": f"Order {cancel_button_value} status has been updated."
-                    }
-                )
             except ModelForm.DoesNotExist:
-                logger.error(f"Order {cancel_button_value} does not exist")
                 pass
         return redirect('table_list')
 

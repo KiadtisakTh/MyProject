@@ -32,32 +32,13 @@ def admin_detail(req,id):
     order = ModelForm.objects.get(pk=id)
     return render(req,'admin_detail.html',{'order':order})
 
-logger = logging.getLogger(__name__)
+
 
 def update_status(req, id):
     order = ModelForm.objects.get(pk=id)
     if req.method == "POST":
         order.status = req.POST['status']
         order.save()
-        logger.info(f"Order status updated to {order.status} for order ID {id}")
-
-        channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(
-            "admin_orders",
-            {
-                "type": "order_update",
-                "message": f"Order {id} status has been updated."
-            }
-        )
-
-        async_to_sync(channel_layer.group_send)(
-            "user_orders",
-            {
-                "type": "order_update",
-                "message": f"Order {id} status has been updated."
-            }
-        )
-
         return redirect("/admin_home")
     
 @login_required

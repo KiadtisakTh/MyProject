@@ -26,8 +26,6 @@ SECRET_KEY = "django-insecure-p(gg1a*_=c#g@flsx_ozy0fa^px#pav*l0^(a#x478%31c6481
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:80','http://127.0.0.1:80','https://f1f5-49-229-22-10.ngrok-free.app']
 
 
 # Application definition
@@ -72,10 +70,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    # โดเมนอื่น ๆ ที่ได้รับอนุญาต
-]
 
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = "myproject.urls"
