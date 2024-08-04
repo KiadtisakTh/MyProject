@@ -66,8 +66,8 @@ def admin_delete(req ,id):
 class DateFilterForm(forms.Form):
     start_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
 
-def dashboard_view(request):
-    form = DateFilterForm(request.GET or None)
+def dashboard_view(req):
+    form = DateFilterForm(req.GET or None)
     if form.is_valid():
         start_date = form.cleaned_data['start_date']
         orders = ModelForm.objects.filter(date_start__gte=start_date)
@@ -114,7 +114,7 @@ def dashboard_view(request):
         'daily_orders': daily_orders,
     }
 
-    return render(request, 'dashboard.html', context)
+    return render(req, 'dashboard.html', context)
 
-def reset_date_filter(request):
+def reset_date_filter(req):
     return redirect('dashboard')

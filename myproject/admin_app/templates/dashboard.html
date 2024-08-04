@@ -1,4 +1,4 @@
-{% extends 'components/base_admin.html' %}
+{% extends 'components/2.html' %}
 
 {% block title %} รายละเอียด {% endblock %}
 
@@ -45,6 +45,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var pieCtx = document.getElementById('pieChart').getContext('2d');
         var pieChart = new Chart(pieCtx, {
@@ -96,9 +97,17 @@
                 }]
             },
             options: {
+                responsive: true,
                 scales: {
                     y: {
                         beginAtZero: true
+                    }
+                },
+                animation: {
+                    duration: 3000, // ระยะเวลาในการแสดงผล animation (มิลลิวินาที)
+                    easing: 'easeOutElastic', // เลือกรูปแบบของ animation ที่ชัดเจนขึ้น
+                    onComplete: function() {
+                        console.log('Animation complete!');
                     }
                 }
             }
