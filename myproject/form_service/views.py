@@ -13,6 +13,7 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 
 # Create your views here.
+@login_required
 def service_user(req):
     if req.method == "POST":
         date_start = req.POST.get('date_start')
